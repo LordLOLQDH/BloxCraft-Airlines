@@ -1,0 +1,25 @@
+name: Validate project files
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check XML files
+        run: |
+          find . -type f -name '*.xml' -print0 | while IFS= read -r -d '' file; do
+            echo "Checking $file"
+            xmllint --noout "$file"
+          done
+      - name: Check required project files
+        run: |
+          test -f BloxCraft-Airlines-set.xml
+          test -f BC-001.xml
+          test -f Engines/BC001-Turbojet.xml
+          test -f Models/bloxcraft.ac
+          test -f Models/bloxcraft.xml
+          test -f Nasal/bloxcraft.nas
+          test -f index.html
