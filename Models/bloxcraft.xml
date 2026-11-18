@@ -1,11 +1,17 @@
 <?xml version="1.0"?>
 <PropertyList>
   <path>Aircraft/BloxCraft-Airlines/Models/bloxcraft.ac</path>
+
+  <animation>
+    <type>visibility</type><object-name>afterburner-flame</object-name>
+    <condition><greater-than><property>/bloxcraft/afterburner</property><value>0.5</value></greater-than></condition>
+  </animation>
   <animation>
     <type>spin</type><object-name>afterburner-flame</object-name>
     <property>/bloxcraft/afterburner</property><factor>900</factor>
     <axis><x>1</x><y>0</y><z>0</z></axis>
   </animation>
+
   <animation>
     <type>translate</type><object-name>wheel-left</object-name>
     <property>/bloxcraft/wheels-dropped</property><factor>-5</factor>
@@ -21,14 +27,13 @@
     <property>/bloxcraft/wheels-dropped</property><factor>-5</factor>
     <axis><x>0</x><y>0</y><z>1</z></axis>
   </animation>
+
   <animation>
-    <type>translate</type><object-name>landing-cushion</object-name>
-    <property>/bloxcraft/cushion-deployed</property><factor>-0.8</factor>
-    <axis><x>0</x><y>0</y><z>1</z></axis>
+    <type>visibility</type><object-name>landing-cushion</object-name>
+    <condition><greater-than><property>/bloxcraft/cushion-deployed</property><value>0.5</value></greater-than></condition>
   </animation>
   <animation>
-    <type>translate</type><object-name>parachute</object-name>
-    <property>/bloxcraft/parachute-deployed</property><factor>2</factor>
-    <axis><x>0</x><y>0</y><z>1</z></axis>
+    <type>visibility</type><object-name>parachute</object-name>
+    <condition><greater-than><property>/bloxcraft/parachute-deployed</property><value>0.5</value></greater-than></condition>
   </animation>
 </PropertyList>
