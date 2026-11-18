@@ -4,8 +4,12 @@ MATERIAL "dark-metal" rgb 0.10 0.11 0.12 amb 0.05 0.05 0.05 emis 0 0 0 spec 0.18
 MATERIAL "window-blue" rgb 0.10 0.35 0.52 amb 0.05 0.15 0.22 emis 0.01 0.02 0.03 spec 0.7 0.8 0.9 shi 64
 MATERIAL "engine-orange" rgb 1.0 0.25 0.02 amb 0.3 0.06 0.01 emis 0.8 0.12 0.01 spec 0.2 0.1 0.05 shi 8
 MATERIAL "cushion" rgb 0.78 0.80 0.84 amb 0.3 0.3 0.3 emis 0 0 0 spec 0.15 0.15 0.15 shi 10
+MATERIAL "disco-blue" rgb 0.05 0.35 1.0 amb 0.02 0.08 0.3 emis 0.05 0.25 1.0 spec 0 0 0 shi 0
+MATERIAL "disco-green" rgb 0.05 1.0 0.25 amb 0.02 0.2 0.05 emis 0.05 1.0 0.15 spec 0 0 0 shi 0
+MATERIAL "disco-red" rgb 1.0 0.04 0.04 amb 0.2 0.01 0.01 emis 1.0 0.02 0.02 spec 0 0 0 shi 0
+MATERIAL "disco-white" rgb 1.0 1.0 1.0 amb 0.2 0.2 0.2 emis 0.8 0.8 0.8 spec 0 0 0 shi 0
 OBJECT world
-kids 10
+kids 14
 OBJECT poly
 name "fuselage"
 crease 45.000
@@ -560,6 +564,231 @@ refs 4
 6 0 0
 SURF 0x30
 mat 3
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+
+OBJECT poly
+name "disco-lamp-blue"
+crease 45.000
+numvert 8
+-0.17 -0.89 2
+0.17 -0.89 2
+0.17 -0.5499999999999999 2
+-0.17 -0.5499999999999999 2
+-0.17 -0.89 2.16
+0.17 -0.89 2.16
+0.17 -0.5499999999999999 2.16
+-0.17 -0.5499999999999999 2.16
+numsurf 6
+SURF 0x30
+mat 5
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 5
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 5
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 5
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 5
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 5
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "disco-lamp-green"
+crease 45.000
+numvert 8
+-0.17 0.5499999999999999 2
+0.17 0.5499999999999999 2
+0.17 0.89 2
+-0.17 0.89 2
+-0.17 0.5499999999999999 2.16
+0.17 0.5499999999999999 2.16
+0.17 0.89 2.16
+-0.17 0.89 2.16
+numsurf 6
+SURF 0x30
+mat 6
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 6
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 6
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 6
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 6
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 6
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "disco-lamp-red"
+crease 45.000
+numvert 8
+0.5499999999999999 -0.17 2
+0.89 -0.17 2
+0.89 0.17 2
+0.5499999999999999 0.17 2
+0.5499999999999999 -0.17 2.16
+0.89 -0.17 2.16
+0.89 0.17 2.16
+0.5499999999999999 0.17 2.16
+numsurf 6
+SURF 0x30
+mat 7
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 7
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 7
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 7
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 7
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 7
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "disco-lamp-white"
+crease 45.000
+numvert 8
+-0.89 -0.17 2
+-0.5499999999999999 -0.17 2
+-0.5499999999999999 0.17 2
+-0.89 0.17 2
+-0.89 -0.17 2.16
+-0.5499999999999999 -0.17 2.16
+-0.5499999999999999 0.17 2.16
+-0.89 0.17 2.16
+numsurf 6
+SURF 0x30
+mat 8
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 8
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 8
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 8
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 8
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 8
 refs 4
 3 0 0
 0 0 0
