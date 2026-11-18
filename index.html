@@ -163,7 +163,20 @@ function parseAC3D(source){
 }
 function setVisible(name,value){const o=objects.get(name);if(o)o.visible=value;}
 function setButton(id,active,labelOn,labelOff){const b=document.getElementById(id);if(!b)return;b.classList.toggle('active',!!active);if(labelOn&&labelOff)b.childNodes[0].textContent=active?labelOn:labelOff;}
-function moveSmooth(obj,target,duration=650){if(!obj)return;const from=obj.position.z,to=target,start=performance.now();function step(now){const t=Math.min(1,(now-start)/duration),e=1-Math.pow(1-t,3);obj.position.z=from+(to-from)*e;if(t<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+function dropWheelToGround(obj,duration=950){const from=obj.position.y,to=-2.48,start=performance.now();function step(now){const t=Math.min(1,(now-start)/duration),e=1-Math.pow(1-t,3);obj.position.y=from+(to-from)*e;if(t<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+function detachWheels(){
+ aircraftRoot.updateMatrixWorld(true);
+ for(const w of wheelStart){
+  const p=w.obj.getWorldPosition(new THREE.Vector3()),q=w.obj.getWorldQuaternion(new THREE.Quaternion());
+  scene.add(w.obj);w.obj.position.copy(p);w.obj.quaternion.copy(q);w.detached=true;dropWheelToGround(w.obj);
+ }
+}
+function reattachWheels(){
+ for(const w of wheelStart){
+  if(w.detached){scene.remove(w.obj);aircraftRoot.add(w.obj);w.detached=false;}
+  w.obj.position.copy(w.localPos);w.obj.quaternion.identity();w.obj.rotation.set(0,0,0);w.obj.visible=true;
+ }
+}
 function addGearStruts(){
  if(objects.has('gear-struts'))return;
  const metal=new THREE.MeshStandardMaterial({color:0x77838e,metalness:.72,roughness:.3});
@@ -183,16 +196,16 @@ function updateHud(){
  document.getElementById('flightPhase').textContent=names[flightPhase]||flightPhase;
 }
 function resetPreview(){
- driving=false;driveSpeed=0;driveDistance=0;wheelPhase=0;flightY=0;verticalSpeed=0;takeoff=false;crashPending=false;crashed=false;crashVelocity=0;crashTimer=0;flightPhase='READY';
+ driving=false;driveSpeed=0;driveDistance=0;wheelPhase=0;flightY=0;verticalSpeed=0;takeoff=false;crashPending=false;crashed=false;crashVelocity=0;crashTimer=0;flightPhase='READY';cockpitView=false;reattachWheels();
  aircraftMotion.position.set(0,0,0);aircraftMotion.rotation.set(0,0,0);camera.fov=48;camera.updateProjectionMatrix();
  engineOn=false;afterburnerOn=false;wheelsOut=false;cushionOut=false;parachuteOut=false;discoOn=false;discoPhase=0;
  setVisible('afterburner-flame',false);setVisible('landing-cushion',false);setVisible('parachute',false);updateDiscoVisibility();
- for(const w of wheelStart){w.obj.position.z=w.z;w.obj.rotation.set(0,0,0);w.obj.visible=true;}
+ for(const w of wheelStart){w.obj.rotation.set(0,0,0);w.obj.visible=true;}
  if(fuselageMesh){fuselageMesh.position.z=0;fuselageMesh.rotation.set(0,0,0);}
  if(cushionMesh)cushionMesh.scale.set(1,1,1);
  aircraftRoot.traverse(o=>{if(o.isMesh&&o.userData.originalSide!==undefined)o.material.side=o.userData.originalSide;});
  setVisible('gear-struts',true);
- setButton('driveBtn',false,'Fahrt stoppen','Startsequenz starten');setButton('engineBtn',false,'Triebwerk stoppen','Triebwerk starten');setButton('afterburnerBtn',false);setButton('wheelsBtn',false);setButton('cushionBtn',false);setButton('parachuteBtn',false);setButton('discoBtn',false);
+ setButton('driveBtn',false,'Fahrt stoppen','Startsequenz starten');setButton('viewBtn',false,'Außenansicht','Innenansicht');setButton('engineBtn',false,'Triebwerk stoppen','Triebwerk starten');setButton('afterburnerBtn',false);setButton('wheelsBtn',false);setButton('cushionBtn',false);setButton('parachuteBtn',false);setButton('discoBtn',false);
  document.getElementById('wheelsBtn').disabled=false;document.getElementById('cushionBtn').disabled=false;
  document.getElementById('wheelsBtn').textContent='Räder abwerfen';document.getElementById('cushionBtn').textContent='Luftkissen ausfahren';
  controls.enabled=true;camera.position.set(8.6,6.4,8.6);controls.target.set(0,0,0);
@@ -232,7 +245,7 @@ document.getElementById('engineBtn').addEventListener('click',()=>{
 });
 document.getElementById('afterburnerBtn').addEventListener('click',()=>{afterburnerOn=!afterburnerOn;setVisible('afterburner-flame',afterburnerOn);setButton('afterburnerBtn',afterburnerOn);});
 document.getElementById('wheelsBtn').addEventListener('click',()=>{
- if(wheelsOut)return;wheelsOut=true;crashPending=true;crashTimer=0;driving=false;setButton('driveBtn',false,'Fahrt stoppen','Startsequenz starten');controls.enabled=false;for(const w of wheelStart){moveSmooth(w.obj,w.z-5);w.obj.visible=true;}
+ if(wheelsOut)return;wheelsOut=true;crashPending=true;crashTimer=0;driving=false;setButton('driveBtn',false,'Fahrt stoppen','Startsequenz starten');controls.enabled=false;detachWheels();
  setVisible('gear-struts',false);aircraftRoot.traverse(o=>{if(o.isMesh&&o.name==='landing-gear-strut')o.visible=false;});
  setButton('wheelsBtn',true);document.getElementById('wheelsBtn').disabled=true;
  if(!driving){flightPhase='CRASH';crashTimer=0;}
@@ -255,7 +268,7 @@ async function loadOriginalModel(){
   for(const name of ['afterburner-flame','landing-cushion','parachute','disco-lamp-blue','disco-lamp-green','disco-lamp-red','disco-lamp-white','disco-beam-blue','disco-beam-green','disco-beam-red','disco-beam-white'])setVisible(name,false);
   for(const name of ['wheel-nose','wheel-left','wheel-right']){
    const obj=objects.get(name);
-   if(obj){const centers={'wheel-nose':[-.985,0,-2.34],'wheel-left':[1.315,-1.23,-2.34],'wheel-right':[1.315,1.23,-2.34]};const c=new THREE.Vector3(...centers[name]);const pivot=new THREE.Group();pivot.name=name+'-pivot';pivot.position.copy(c);aircraftRoot.remove(obj);obj.position.copy(c).multiplyScalar(-1);pivot.add(obj);aircraftRoot.add(pivot);objects.set(name,pivot);wheelStart.push({obj:pivot,z:pivot.position.z});}
+   if(obj){const centers={'wheel-nose':[-.985,0,-2.34],'wheel-left':[1.315,-1.23,-2.34],'wheel-right':[1.315,1.23,-2.34]};const c=new THREE.Vector3(...centers[name]);const pivot=new THREE.Group();pivot.name=name+'-pivot';pivot.position.copy(c);aircraftRoot.remove(obj);obj.position.copy(c).multiplyScalar(-1);pivot.add(obj);aircraftRoot.add(pivot);objects.set(name,pivot);wheelStart.push({obj:pivot,z:pivot.position.z,localPos:c.clone(),detached:false});}
   }
   fuselageMesh=objects.get('fuselage');cushionMesh=objects.get('landing-cushion');if(cushionMesh)cushionMesh.scale.set(1,1,1);
   addGearStruts();flame=objects.get('afterburner-flame');
@@ -311,7 +324,7 @@ function render(now){
  }
  if(discoOn){lastTick+=dt;if(lastTick>=.25){lastTick=0;discoPhase=(discoPhase+1)%4;updateDiscoVisibility();}}
  if(afterburnerOn&&flame){const pulse=.96+Math.sin(now*.018)*.06;flame.scale.set(1,pulse,pulse);}
- updateHud();renderer.render(scene,camera);
+ sky.position.copy(camera.position);sun.position.copy(camera.position).add(new THREE.Vector3(-420,380,-900));updateHud();renderer.render(scene,camera);
 }
 requestAnimationFrame(render);loadOriginalModel();
 </script>
