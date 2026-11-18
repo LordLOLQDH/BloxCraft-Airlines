@@ -2,35 +2,35 @@
 
 A deliberately ridiculous, wingless, perfectly cubic FlightGear aircraft.
 
-## BC-001 v0.1 development scaffold
+## Project
 
-- 4 m × 4 m × 4 m matte-grey cube fuselage
-- One square front window and a simple cockpit placard
-- Three square landing wheels
-- Rear engine nozzle
-- Nasal key controls for engine state, afterburner, wheel jettison, landing cushion, emergency parachute and disco radio
-- Windows/Linux-friendly case-sensitive paths
+- 4 m × 4 m × 4 m matte-grey cube fuselage with square front window
+- Three square wheels, rear engine nozzle and visual afterburner
+- Keyboard control logic for engine, afterburner, wheel release, landing cushion, parachute and disco/radio mode
+- Website: enable GitHub Pages from the repository root to publish `index.html`
 
-## Current status
+## Website
 
-This is an early development scaffold, not yet a tested release. The visual model and control-state scripts are being assembled first. Flight dynamics, physical contact/landing behaviour, audio playback, and final cockpit visibility still require in-simulator testing and refinement.
+The repository root contains a responsive project website. With GitHub Pages enabled for branch `main` and folder `/ (root)`, it is published at:
 
-## Controls planned
+`https://lordlolqdh.github.io/BloxCraft-Airlines/`
+
+## Controls
 
 | Key | Action |
 |---|---|
-| I | Start/stop engines |
+| I | Start/stop engine |
 | A | Toggle afterburner |
 | H | Drop the three wheels |
 | G | Deploy landing cushion |
-| P | Deploy emergency parachute |
-| E | Simulate engine failure |
+| P | Deploy parachute |
+| E | Simulate engine failure and deploy parachute |
 | R | Toggle radio/disco mode |
 
-## Install for testing
+## Sound files
 
-Copy the BloxCraft-Airlines folder into your FlightGear aircraft directory, then select **BloxCraft Airlines BC-001** in the aircraft launcher. Keep the folder name exactly BloxCraft-Airlines.
+See [Sounds/README.txt](Sounds/README.txt) for exact filenames and requirements. Sound playback remains unconfigured until the user-provided audio files are available.
 
-## Sounds
+## Development status
 
-The Sounds directory is reserved for user-provided audio. No music or sound files are included yet.
+The 3D cube and the initial Nasal control-state logic are in place. This is still a development build. The current `magic` flight model is a placeholder, not a physical flight model. It does not yet deliver a validated Mach-10 flight profile, true detachable wheel physics, or a physically modelled air-cushion landing. These require a dedicated JSBSim/YASim flight model and simulator testing. Do not treat the BC-001 as a real aircraft.
