@@ -173,7 +173,7 @@ document.querySelectorAll('[data-audio]').forEach(b=>b.addEventListener('click',
  else toggleLoop(key,b);
 }));
 document.getElementById('engineBtn').addEventListener('click',()=>{
- if(!engineOn){engineOn=true;playOnce(audio.start);setButton('engineBtn',true,'Triebwerk stoppen','Triebwerk starten');setTimeout(()=>{if(engineOn)audio.engine.play().catch(()=>{});},900);}
+ if(!engineOn){engineOn=true;playOnce(audio.start);setButton('engineBtn',true,'Triebwerk stoppen','Triebwerk starten');setTimeout(()=>{if(engineOn)audio.engine.play().catch(()=>{});},3000);}
  else{engineOn=false;audio.engine.pause();audio.engine.currentTime=0;playOnce(audio.stop);setButton('engineBtn',false,'Triebwerk stoppen','Triebwerk starten');}
 });
 document.getElementById('afterburnerBtn').addEventListener('click',()=>{afterburnerOn=!afterburnerOn;setVisible('afterburner-flame',afterburnerOn);setButton('afterburnerBtn',afterburnerOn);});
