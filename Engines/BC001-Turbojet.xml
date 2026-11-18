@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<turbine_engine name="BC001-Turbojet">
+  <milthrust>180000</milthrust><maxthrust>260000</maxthrust><bypassratio>0.0</bypassratio><tsfc>1.15</tsfc><atsfc>2.10</atsfc>
+  <idlen1>0.0</idlen1><idlen2>53.0</idlen2><maxn1>100.0</maxn1><maxn2>100.0</maxn2><augmented>1</augmented><augmethod>1</augmethod><injected>0</injected>
+</turbine_engine>
