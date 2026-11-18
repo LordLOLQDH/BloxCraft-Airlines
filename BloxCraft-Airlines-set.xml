@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <sim>
+    <description>BloxCraft Airlines BC-001</description>
+    <author>BloxCraft Airlines</author>
+    <status>Development</status>
+    <aircraft-version>0.1</aircraft-version>
+    <flight-model>magic</flight-model>
+    <model><path>Aircraft/BloxCraft-Airlines/Models/bloxcraft.xml</path></model>
+  </sim>
+  <input>
+    <keyboard>
+      <key n="i"><name>Engine start / stop</name><binding><command>nasal</command><script>BloxCraft.toggleEngine();</script></binding></key>
+      <key n="a"><name>Afterburner</name><binding><command>nasal</command><script>BloxCraft.toggleAfterburner();</script></binding></key>
+      <key n="h"><name>Heat up: drop wheels</name><binding><command>nasal</command><script>BloxCraft.dropWheels();</script></binding></key>
+      <key n="g"><name>Deploy landing cushion</name><binding><command>nasal</command><script>BloxCraft.deployCushion();</script></binding></key>
+      <key n="p"><name>Emergency parachute</name><binding><command>nasal</command><script>BloxCraft.deployParachute();</script></binding></key>
+      <key n="e"><name>Simulate engine failure</name><binding><command>nasal</command><script>BloxCraft.engineFailure();</script></binding></key>
+      <key n="r"><name>Radio / disco mode</name><binding><command>nasal</command><script>BloxCraft.toggleDisco();</script></binding></key>
+    </keyboard>
+  </input>
+  <nasal>
+    <BloxCraft><file>Aircraft/BloxCraft-Airlines/Nasal/bloxcraft.nas</file></BloxCraft>
+  </nasal>
+</PropertyList>
