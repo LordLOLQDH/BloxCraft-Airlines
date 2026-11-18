@@ -7,7 +7,7 @@ A deliberately wingless, perfectly cubic FlightGear aircraft.
 - Three square wheels, rear nozzle with silent visual afterburner, landing cushion and parachute
 - Nasal keyboard control logic and animated disco lighting
 - Initial JSBSim flight-dynamics configuration and custom engine
-- Responsive project website in index.html
+- Responsive project website in index.html with a live 3D preview parsed from the same Models/bloxcraft.ac file used by FlightGear, plus interactive sound and animation controls
 - Windows and Linux installation scripts
 
 ## Website
