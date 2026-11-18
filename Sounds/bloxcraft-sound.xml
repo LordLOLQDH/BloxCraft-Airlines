@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <fx>
+    <engine-start><name>bc-engine-start</name><path>Aircraft/BloxCraft-Airlines/Sounds/engine-start.ogg</path><mode>once</mode><property>/bloxcraft/sound/engine-start</property></engine-start>
+    <engine-stop><name>bc-engine-stop</name><path>Aircraft/BloxCraft-Airlines/Sounds/engine-stop.ogg</path><mode>once</mode><property>/bloxcraft/sound/engine-stop</property></engine-stop>
+    <afterburner-on><name>bc-afterburner-on</name><path>Aircraft/BloxCraft-Airlines/Sounds/afterburner-on.ogg</path><mode>once</mode><property>/bloxcraft/sound/afterburner-on</property></afterburner-on>
+    <afterburner-loop><name>bc-afterburner-loop</name><path>Aircraft/BloxCraft-Airlines/Sounds/afterburner-loop.ogg</path><mode>looped</mode><property>/bloxcraft/afterburner</property></afterburner-loop>
+    <radio><name>bc-radio</name><path>Aircraft/BloxCraft-Airlines/Sounds/radio-song.ogg</path><mode>looped</mode><property>/bloxcraft/radio-enabled</property></radio>
+    <bass><name>bc-bass</name><path>Aircraft/BloxCraft-Airlines/Sounds/bass-loop.ogg</path><mode>looped</mode><property>/bloxcraft/radio-enabled</property></bass>
+  </fx>
+</PropertyList>
