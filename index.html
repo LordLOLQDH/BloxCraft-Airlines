@@ -165,6 +165,7 @@ function setVisible(name,value){const o=objects.get(name);if(o)o.visible=value;}
 function setButton(id,active,labelOn,labelOff){const b=document.getElementById(id);if(!b)return;b.classList.toggle('active',!!active);if(labelOn&&labelOff)b.childNodes[0].textContent=active?labelOn:labelOff;}
 function moveSmooth(obj,target,duration=650){if(!obj)return;const from=obj.position.z,to=target,start=performance.now();function step(now){const t=Math.min(1,(now-start)/duration),e=1-Math.pow(1-t,3);obj.position.z=from+(to-from)*e;if(t<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
 function addGearStruts(){
+ if(objects.has('gear-struts'))return;
  const metal=new THREE.MeshStandardMaterial({color:0x77838e,metalness:.72,roughness:.3});
  const struts=[
   [[-1.0,0,-1.92],[-.985,0,-2.23]],
@@ -190,6 +191,7 @@ function resetPreview(){
  if(fuselageMesh){fuselageMesh.position.z=0;fuselageMesh.rotation.set(0,0,0);}
  if(cushionMesh)cushionMesh.scale.set(1,1,1);
  aircraftRoot.traverse(o=>{if(o.isMesh&&o.userData.originalSide!==undefined)o.material.side=o.userData.originalSide;});
+ setVisible('gear-struts',true);
  setButton('driveBtn',false,'Fahrt stoppen','Startsequenz starten');setButton('engineBtn',false,'Triebwerk stoppen','Triebwerk starten');setButton('afterburnerBtn',false);setButton('wheelsBtn',false);setButton('cushionBtn',false);setButton('parachuteBtn',false);setButton('discoBtn',false);
  document.getElementById('wheelsBtn').disabled=false;document.getElementById('cushionBtn').disabled=false;
  document.getElementById('wheelsBtn').textContent='Räder abwerfen';document.getElementById('cushionBtn').textContent='Luftkissen ausfahren';
@@ -207,12 +209,12 @@ function setInterior(on){
  if(fuselageMesh){fuselageMesh.visible=true;fuselageMesh.traverse(o=>{if(o.isMesh){if(o.userData.originalSide===undefined)o.userData.originalSide=o.material.side;o.material.side=on?THREE.BackSide:THREE.DoubleSide;}});}
  if(on){
   controls.enabled=false;
-  const p=aircraftRoot.localToWorld(new THREE.Vector3(0,0,-.05));
-  const t=aircraftRoot.localToWorld(new THREE.Vector3(-8,0,-.05));
-  camera.position.copy(p);camera.up.set(0,1,0);camera.lookAt(t);
+  const p=aircraftRoot.localToWorld(new THREE.Vector3(0,0,.38));
+  const t=aircraftRoot.localToWorld(new THREE.Vector3(-8,0,-.12));
+  camera.position.copy(p);camera.up.set(0,1,0);camera.fov=78;camera.updateProjectionMatrix();camera.lookAt(t);
   setButton('viewBtn',true,'Außenansicht','Innenansicht');
  }else{
-  controls.enabled=true;camera.position.set(8.6,6.4,8.6).add(aircraftMotion.position);controls.target.copy(aircraftMotion.position);
+  controls.enabled=true;camera.fov=48;camera.updateProjectionMatrix();camera.position.set(8.6,6.4,8.6).add(aircraftMotion.position);controls.target.copy(aircraftMotion.position);
   setButton('viewBtn',false,'Außenansicht','Innenansicht');
  }
 }
@@ -230,13 +232,13 @@ document.getElementById('engineBtn').addEventListener('click',()=>{
 });
 document.getElementById('afterburnerBtn').addEventListener('click',()=>{afterburnerOn=!afterburnerOn;setVisible('afterburner-flame',afterburnerOn);setButton('afterburnerBtn',afterburnerOn);});
 document.getElementById('wheelsBtn').addEventListener('click',()=>{
- if(wheelsOut)return;wheelsOut=true;crashPending=true;crashTimer=0;for(const w of wheelStart){moveSmooth(w.obj,w.z-5);w.obj.visible=true;}
- aircraftRoot.traverse(o=>{if(o.isMesh&&o.name==='landing-gear-strut')o.visible=false;});
+ if(wheelsOut)return;wheelsOut=true;crashPending=true;crashTimer=0;driving=false;setButton('driveBtn',false,'Fahrt stoppen','Startsequenz starten');controls.enabled=false;for(const w of wheelStart){moveSmooth(w.obj,w.z-5);w.obj.visible=true;}
+ setVisible('gear-struts',false);aircraftRoot.traverse(o=>{if(o.isMesh&&o.name==='landing-gear-strut')o.visible=false;});
  setButton('wheelsBtn',true);document.getElementById('wheelsBtn').disabled=true;
  if(!driving){flightPhase='CRASH';crashTimer=0;}
 });
 document.getElementById('cushionBtn').addEventListener('click',()=>{
- if(cushionOut)return;cushionOut=true;setVisible('landing-cushion',true);if(cushionMesh)cushionMesh.scale.set(.15,.15,.15);setButton('cushionBtn',true);
+ if(cushionOut)return;cushionOut=true;setVisible('landing-cushion',true);if(cushionMesh)cushionMesh.scale.set(.08,.08,.08);setButton('cushionBtn',true);
  document.getElementById('cushionBtn').textContent='Luftkissen aktiv';
 });
 document.getElementById('popBtn').addEventListener('click',()=>{if(!cushionOut)return;cushionOut=false;setVisible('landing-cushion',false);setButton('cushionBtn',false);document.getElementById('cushionBtn').textContent='Luftkissen ausfahren';});
@@ -255,7 +257,7 @@ async function loadOriginalModel(){
    const obj=objects.get(name);
    if(obj){const centers={'wheel-nose':[-.985,0,-2.34],'wheel-left':[1.315,-1.23,-2.34],'wheel-right':[1.315,1.23,-2.34]};const c=new THREE.Vector3(...centers[name]);const pivot=new THREE.Group();pivot.name=name+'-pivot';pivot.position.copy(c);aircraftRoot.remove(obj);obj.position.copy(c).multiplyScalar(-1);pivot.add(obj);aircraftRoot.add(pivot);objects.set(name,pivot);wheelStart.push({obj:pivot,z:pivot.position.z});}
   }
-  fuselageMesh=objects.get('fuselage');cushionMesh=objects.get('landing-cushion');if(cushionMesh)cushionMesh.scale.set(2.65,2.65,2.2);
+  fuselageMesh=objects.get('fuselage');cushionMesh=objects.get('landing-cushion');if(cushionMesh)cushionMesh.scale.set(1,1,1);
   addGearStruts();flame=objects.get('afterburner-flame');
   modelReady=true;status.textContent='Originalmodell geladen · '+count+' Modellteile';dot.classList.add('ready');
   resetPreview();
@@ -286,22 +288,24 @@ function render(now){
   if(!cockpitView){camera.position.x-=dx;controls.target.x-=dx;}
   else{aircraftRoot.updateMatrixWorld(true);const p=aircraftRoot.localToWorld(new THREE.Vector3(0,0,-.05));const t=aircraftRoot.localToWorld(new THREE.Vector3(-8,0,-.05));camera.position.copy(p);camera.lookAt(t);}
   const targetFov=48+Math.min(38,mach*3.8);camera.fov+=(targetFov-camera.fov)*Math.min(1,dt*2.6);camera.updateProjectionMatrix();
-  if(!cockpitView){camera.position.y=aircraftMotion.position.y+6.4+Math.sin(now*.02)*Math.min(.5,mach*.05);camera.position.z=aircraftMotion.position.z+8.6+Math.sin(now*.013)*Math.min(.25,mach*.025);controls.target.y=aircraftMotion.position.y;controls.update();}
+  if(!cockpitView){camera.position.y=aircraftMotion.position.y+6.4+Math.sin(now*.02)*Math.min(1.1,mach*.11);camera.position.z=aircraftMotion.position.z+8.6+Math.sin(now*.013)*Math.min(.55,mach*.055);controls.target.y=aircraftMotion.position.y;}
   clouds.forEach((c,i)=>{c.position.x+=dx*.7;if(c.position.x>aircraftMotion.position.x+1000)c.position.x=aircraftMotion.position.x-1200;});
   if(driveSpeed>=3425){flightPhase='CRUISE';}
  }else if(crashPending&&!crashed){
   crashTimer+=dt;
   if(crashTimer>.75){
    crashVelocity+=18*dt;aircraftMotion.position.y-=crashVelocity*dt;
-   aircraftMotion.position.x-=Math.max(0,driveSpeed*.02)*dt;
+   aircraftMotion.position.x-=Math.min(8,Math.max(0,driveSpeed*.002))*dt;
    aircraftMotion.rotation.z=Math.min(.24,aircraftMotion.rotation.z+dt*.16);
-   if(aircraftMotion.position.y<=-.72){aircraftMotion.position.y=-.72;crashed=true;crashPending=false;crashVelocity=0;crashTimer=0;flightPhase='CRASH';driveSpeed=Math.max(0,driveSpeed*.28);}
+   if(!cockpitView){camera.position.set(aircraftMotion.position.x+8.6,aircraftMotion.position.y+6.4,8.6);controls.target.copy(aircraftMotion.position);}
+   if(aircraftMotion.position.y<=-.72){aircraftMotion.position.y=-.72;crashed=true;crashPending=false;crashVelocity=0;crashTimer=0;flightPhase='CRASH';driveSpeed=Math.min(45,driveSpeed*.02);}
   }
  }
- if(crashed&&!cushionOut&&driveSpeed>0){driveSpeed=Math.max(0,driveSpeed-9*dt);const dx=driveSpeed*.012*dt;aircraftMotion.position.x-=dx;}
- if(crashed&&driveSpeed<=.01){driveSpeed=0;flightPhase='STOPPED';}
+ if(crashed&&!cushionOut&&driveSpeed>0){driveSpeed=Math.max(0,driveSpeed-13*dt);const dx=driveSpeed*.05*dt;aircraftMotion.position.x-=dx;}
+ if(crashed&&driveSpeed<=.01){driveSpeed=0;flightPhase='STOPPED';audio.engine.pause();audio.engine.currentTime=0;}
  if(cushionOut){
-  if(cushionMesh){const target=new THREE.Vector3(2.65,2.65,2.2);cushionMesh.scale.lerp(target,Math.min(1,dt*3));}
+  if(driving&&driveSpeed<=.01){driving=false;setButton('driveBtn',false,'Fahrt stoppen','Startsequenz starten');audio.engine.pause();audio.engine.currentTime=0;flightPhase='CUSHION';}
+  if(cushionMesh){const target=new THREE.Vector3(1,1,1);cushionMesh.scale.lerp(target,Math.min(1,dt*3));}
   if(crashed){aircraftMotion.position.y=Math.min(-.15,aircraftMotion.position.y+dt*.65);driveSpeed=Math.max(0,driveSpeed-30*dt);if(driveSpeed<.01){driveSpeed=0;flightPhase='CUSHION';}}
   else if(!driving){aircraftMotion.position.y=Math.min(.18,aircraftMotion.position.y+dt*.18);}
  }
