@@ -36,3 +36,6 @@ Four supplied audio files are integrated in Sounds/: engine-start.ogg, engine-st
 
 ## Development status
 Version 0.2 is an experimental development build. The JSBSim file is an initial aerodynamic approximation, not a simulator-validated flight model. The parachute uses the speedbrake drag channel; the wheels and landing cushion currently have visual/control-state behavior only, not fully detachable wheel-body physics or an independently simulated airbag force. The Mach-10-in-10-seconds target is not achieved or validated. FlightGear testing is still required. This is a fictional entertainment aircraft, not a real aircraft.
+
+## Interactive website preview
+The website now includes exterior and cockpit camera views, a translucent front window, a runway taxi/start sequence, rotating wheel pivots that stay attached to the airframe, and suspension-like bouncing from the square wheels. The browser preview animates the original AC3D meshes; it is a visual demo and not a replacement for FlightGear's physics simulation.
