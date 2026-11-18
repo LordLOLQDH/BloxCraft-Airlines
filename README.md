@@ -32,7 +32,7 @@ Windows PowerShell: run .\install-windows.ps1 and optionally pass -AircraftDirec
 The aircraft-local Engines/ directory contains the custom JSBSim engine file. Keep it alongside BC-001.xml when installing. Select BloxCraft-Airlines in FlightGear.
 
 ## Audio
-Exact filenames and export notes are in Sounds/README.txt. The sound configuration is prepared; add the requested OGG files directly to Sounds/.
+Four supplied audio files are integrated in Sounds/: engine-start.ogg, engine-stop.ogg, engine-loop.ogg and radio-song.ogg. The engine loop plays while the engine is running; the radio track loops in radio/disco mode. No separate afterburner sound is used.
 
 ## Development status
 Version 0.2 is an experimental development build. The JSBSim file is an initial aerodynamic approximation, not a simulator-validated flight model. The parachute uses the speedbrake drag channel; the wheels and landing cushion currently have visual/control-state behavior only, not fully detachable wheel-body physics or an independently simulated airbag force. The Mach-10-in-10-seconds target is not achieved or validated. FlightGear testing is still required. This is a fictional entertainment aircraft, not a real aircraft.
