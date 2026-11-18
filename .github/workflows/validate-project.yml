@@ -8,12 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check XML files
+      - name: Parse XML files
         run: |
-          find . -type f -name '*.xml' -print0 | while IFS= read -r -d '' file; do
-            echo "Checking $file"
-            xmllint --noout "$file"
-          done
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          files = sorted(Path(".").rglob("*.xml"))
+          for path in files:
+              print(f"Checking {path}")
+              ET.parse(path)
+          print(f"Parsed {len(files)} XML files successfully.")
+          PY
       - name: Check required project files
         run: |
           test -f BloxCraft-Airlines-set.xml
@@ -22,4 +27,5 @@ jobs:
           test -f Models/bloxcraft.ac
           test -f Models/bloxcraft.xml
           test -f Nasal/bloxcraft.nas
+          test -f Sounds/bloxcraft-sound.xml
           test -f index.html
