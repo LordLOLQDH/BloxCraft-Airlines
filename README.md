@@ -26,10 +26,12 @@ https://lordlolqdh.github.io/BloxCraft-Airlines/
 | R | Toggle radio/disco mode |
 
 ## Installation
-Linux: run ./install-linux.sh and optionally pass the FlightGear Aircraft directory.
-Windows PowerShell: run .\install-windows.ps1 and optionally pass -AircraftDirectory "C:\path\to\FlightGear\Aircraft".
+Linux: run ./install-linux.sh [Aircraft-directory] [FG_ROOT].
+Windows PowerShell: run .\install-windows.ps1 -AircraftDirectory "..." -FlightGearRoot "...".
 
-The custom engine definition in Engines/BC001-Turbojet.xml must also be copied into the FlightGear data directory at Aircraft/Generic/JSBSim/Engines/. Then start FlightGear and select BloxCraft-Airlines. If FlightGear uses a different data directory, use its actual FG_ROOT.
+The installer copies the custom engine definition into FG_ROOT/Aircraft/Generic/JSBSim/Engines when FG_ROOT is supplied. If you omit it, copy Engines/BC001-Turbojet.xml there manually. The FG_ROOT is the FlightGear data directory, not the aircraft folder.
+
+Then start FlightGear and select BloxCraft-Airlines.
 
 ## Audio
 Exact filenames and export notes are in Sounds/README.txt. The sound configuration is prepared; add the requested OGG files directly to Sounds/.
