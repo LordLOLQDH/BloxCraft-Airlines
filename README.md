@@ -26,7 +26,7 @@ https://lordlolqdh.github.io/BloxCraft-Airlines/
 | R | Toggle radio/disco mode |
 
 ## Installation
-Linux: run ./install-linux.sh and optionally pass your FlightGear user Aircraft directory.
+Linux: run `bash ./install-linux.sh` and optionally pass your FlightGear user Aircraft directory.
 Windows PowerShell: run .\install-windows.ps1 and optionally pass -AircraftDirectory "C:\path\to\FlightGear\Aircraft".
 
 The aircraft-local Engines/ directory contains the custom JSBSim engine file. Keep it alongside BC-001.xml when installing. Select BloxCraft-Airlines in FlightGear.
