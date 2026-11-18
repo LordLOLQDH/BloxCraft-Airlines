@@ -1,129 +1,139 @@
-# BloxCraft Airlines BC-001 control logic.
-# Sounds are triggered through the aircraft sound XML and supplied OGG files.
-var BloxCraft = {
-    engineOn: 0, afterburner: 0, wheelsDropped: 0,
-    cushionOut: 0, cushionPopped: 0, parachuteOut: 0, discoOn: 0,
-    monitorTimer: nil, discoTimer: nil, discoPhase: 0
+# BloxCraft Airlines BC-001 control module.
+var engineOn = 0;
+var afterburner = 0;
+var wheelsDropped = 0;
+var cushionOut = 0;
+var cushionPopped = 0;
+var parachuteOut = 0;
+var discoOn = 0;
+var monitorTimer = nil;
+var discoTimer = nil;
+var discoPhase = 0;
+
+var setState = func(name, value) {
+    setprop("/bloxcraft/" ~ name, value);
 };
-BloxCraft.setState = func(name, value) { setprop("/bloxcraft/" ~ name, value); };
-BloxCraft.playOneShot = func(name) {
+var playOneShot = func(name) {
     var p = "/bloxcraft/sound/" ~ name;
-    setprop(p, 0); setprop(p, 1);
+    setprop(p, 0);
+    setprop(p, 1);
     settimer(func { setprop(p, 0); }, 0.15);
 };
-BloxCraft.toggleEngine = func {
-    if (BloxCraft.engineOn) {
-        BloxCraft.engineOn = 0;
-        if (BloxCraft.afterburner) BloxCraft.playOneShot("afterburner-off");
-        BloxCraft.afterburner = 0;
-        BloxCraft.setState("afterburner", 0);
+
+var toggleEngine = func {
+    if (engineOn) {
+        engineOn = 0;
+        afterburner = 0;
+        setState("afterburner", 0);
         setprop("/controls/engines/engine[0]/throttle", 0);
         setprop("/controls/engines/engine[0]/starter", 0);
-        BloxCraft.setState("engine-running", 0);
-        BloxCraft.setState("engine-state", "OFF");
-        BloxCraft.playOneShot("engine-stop");
+        setState("engine-running", 0);
+        setState("engine-state", "OFF");
+        playOneShot("engine-stop");
     } else {
-        BloxCraft.engineOn = 1;
+        engineOn = 1;
         setprop("/controls/engines/engine[0]/starter", 1);
         setprop("/controls/engines/engine[0]/throttle", 0.65);
-        BloxCraft.setState("engine-running", 1);
-        BloxCraft.setState("engine-state", "RUNNING");
-        BloxCraft.setState("engine-failure", 0);
-        BloxCraft.playOneShot("engine-start");
+        setState("engine-running", 1);
+        setState("engine-state", "RUNNING");
+        setState("engine-failure", 0);
+        playOneShot("engine-start");
     }
 };
-BloxCraft.toggleAfterburner = func {
-    if (!BloxCraft.engineOn) { print("BC-001: Start the engines first."); return; }
-    BloxCraft.afterburner = !BloxCraft.afterburner;
-    BloxCraft.setState("afterburner", BloxCraft.afterburner);
-    if (BloxCraft.afterburner) {
+var toggleAfterburner = func {
+    if (!engineOn) { print("BC-001: Start the engines first."); return; }
+    afterburner = !afterburner;
+    setState("afterburner", afterburner);
+    if (afterburner) {
         setprop("/controls/engines/engine[0]/throttle", 1.0);
         setprop("/controls/engines/engine[0]/augmentation", 1);
-        BloxCraft.playOneShot("afterburner-on");
+        playOneShot("afterburner-on");
     } else {
         setprop("/controls/engines/engine[0]/throttle", 0.65);
         setprop("/controls/engines/engine[0]/augmentation", 0);
     }
 };
-BloxCraft.dropWheels = func {
-    if (BloxCraft.wheelsDropped) return;
-    BloxCraft.wheelsDropped = 1;
-    BloxCraft.setState("wheels-dropped", 1);
+var dropWheels = func {
+    if (wheelsDropped) return;
+    wheelsDropped = 1;
+    setState("wheels-dropped", 1);
     print("BC-001: Wheel assemblies released (visual animation).");
 };
-BloxCraft.deployCushion = func {
-    if (BloxCraft.cushionPopped) { print("BC-001: Cushion has popped. Reset the aircraft to repack."); return; }
-    if (BloxCraft.cushionOut) return;
-    BloxCraft.cushionOut = 1;
-    BloxCraft.setState("cushion-deployed", 1);
+var deployCushion = func {
+    if (cushionPopped) { print("BC-001: Cushion has popped. Reset the aircraft to repack."); return; }
+    if (cushionOut) return;
+    cushionOut = 1;
+    setState("cushion-deployed", 1);
 };
-BloxCraft.deployParachute = func {
-    if (BloxCraft.parachuteOut) return;
-    BloxCraft.parachuteOut = 1;
-    BloxCraft.setState("parachute-deployed", 1);
+var deployParachute = func {
+    if (parachuteOut) return;
+    parachuteOut = 1;
+    setState("parachute-deployed", 1);
     setprop("/controls/flight/speedbrake", 1);
 };
-BloxCraft.engineFailure = func {
-    BloxCraft.engineOn = 0; BloxCraft.afterburner = 0;
-    BloxCraft.setState("engine-running", 0);
-    BloxCraft.setState("engine-failure", 1);
-    BloxCraft.setState("engine-state", "FAILURE");
-    BloxCraft.setState("afterburner", 0);
+var engineFailure = func {
+    engineOn = 0;
+    afterburner = 0;
+    setState("engine-running", 0);
+    setState("engine-failure", 1);
+    setState("engine-state", "FAILURE");
+    setState("afterburner", 0);
     setprop("/controls/engines/engine[0]/throttle", 0);
     setprop("/controls/engines/engine[0]/starter", 0);
     setprop("/controls/engines/engine[0]/augmentation", 0);
-    BloxCraft.playOneShot("engine-stop");
-    BloxCraft.deployParachute();
+    playOneShot("engine-stop");
+    deployParachute();
 };
-BloxCraft.toggleDisco = func {
-    BloxCraft.discoOn = !BloxCraft.discoOn;
-    BloxCraft.setState("disco-enabled", BloxCraft.discoOn);
-    BloxCraft.setState("radio-enabled", BloxCraft.discoOn);
-    if (BloxCraft.discoOn) {
-        BloxCraft.discoPhase = 0;
-        BloxCraft.discoTimer = settimer(BloxCraft.discoTick, 0.25);
+var toggleDisco = func {
+    discoOn = !discoOn;
+    setState("disco-enabled", discoOn);
+    setState("radio-enabled", discoOn);
+    if (discoOn) {
+        discoPhase = 0;
+        discoTimer = settimer(discoTick, 0.25);
     } else {
-        if (BloxCraft.discoTimer != nil) removetimer(BloxCraft.discoTimer);
-        BloxCraft.discoTimer = nil;
-        BloxCraft.setState("disco-light-phase", 0);
-        BloxCraft.setState("bass-pulse", 0);
+        if (discoTimer != nil) removetimer(discoTimer);
+        discoTimer = nil;
+        setState("disco-light-phase", 0);
+        setState("bass-pulse", 0);
     }
 };
-BloxCraft.discoTick = func {
-    if (!BloxCraft.discoOn) return;
-    BloxCraft.discoPhase = (BloxCraft.discoPhase + 1) % 4;
-    BloxCraft.setState("disco-light-phase", BloxCraft.discoPhase);
-    BloxCraft.setState("bass-pulse", BloxCraft.discoPhase == 0 ? 1 : 0.25);
-    BloxCraft.discoTimer = settimer(BloxCraft.discoTick, 0.25);
+var discoTick = func {
+    if (!discoOn) return;
+    discoPhase = (discoPhase + 1) % 4;
+    setState("disco-light-phase", discoPhase);
+    setState("bass-pulse", discoPhase == 0 ? 1 : 0.25);
+    discoTimer = settimer(discoTick, 0.25);
 };
-BloxCraft.monitorLanding = func {
-    if (BloxCraft.cushionOut and !BloxCraft.cushionPopped) {
-        var wow = getprop("/gear/gear[0]/wow");
-        var wow2 = getprop("/gear/gear[1]/wow");
-        var wow3 = getprop("/gear/gear[2]/wow");
-        if (wow or wow2 or wow3) {
-            BloxCraft.cushionPopped = 1; BloxCraft.cushionOut = 0;
-            BloxCraft.setState("cushion-deployed", 0);
-            BloxCraft.setState("cushion-popped", 1);
+var monitorLanding = func {
+    if (cushionOut and !cushionPopped) {
+        var wow0 = getprop("/gear/gear[0]/wow");
+        var wow1 = getprop("/gear/gear[1]/wow");
+        var wow2 = getprop("/gear/gear[2]/wow");
+        if (wow0 or wow1 or wow2) {
+            cushionPopped = 1;
+            cushionOut = 0;
+            setState("cushion-deployed", 0);
+            setState("cushion-popped", 1);
             print("BC-001: Landing cushion popped on touchdown.");
         }
     }
-    BloxCraft.monitorTimer = settimer(BloxCraft.monitorLanding, 0.2);
+    monitorTimer = settimer(monitorLanding, 0.2);
 };
-BloxCraft.setState("engine-running", 0);
-BloxCraft.setState("engine-failure", 0);
-BloxCraft.setState("engine-state", "OFF");
-BloxCraft.setState("afterburner", 0);
-BloxCraft.setState("wheels-dropped", 0);
-BloxCraft.setState("cushion-deployed", 0);
-BloxCraft.setState("cushion-popped", 0);
-BloxCraft.setState("parachute-deployed", 0);
-BloxCraft.setState("disco-enabled", 0);
-BloxCraft.setState("radio-enabled", 0);
-BloxCraft.setState("disco-light-phase", 0);
-BloxCraft.setState("bass-pulse", 0);
-BloxCraft.setState("sound/engine-start", 0);
-BloxCraft.setState("sound/engine-stop", 0);
-BloxCraft.setState("sound/afterburner-on", 0);
-BloxCraft.setState("sound/afterburner-off", 0);
-BloxCraft.monitorTimer = settimer(BloxCraft.monitorLanding, 0.2);
+
+setState("engine-running", 0);
+setState("engine-failure", 0);
+setState("engine-state", "OFF");
+setState("afterburner", 0);
+setState("wheels-dropped", 0);
+setState("cushion-deployed", 0);
+setState("cushion-popped", 0);
+setState("parachute-deployed", 0);
+setState("disco-enabled", 0);
+setState("radio-enabled", 0);
+setState("disco-light-phase", 0);
+setState("bass-pulse", 0);
+setState("sound/engine-start", 0);
+setState("sound/engine-stop", 0);
+setState("sound/afterburner-on", 0);
+monitorTimer = settimer(monitorLanding, 0.2);
