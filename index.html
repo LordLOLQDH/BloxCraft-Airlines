@@ -3,24 +3,219 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#f5f6f7">
-<meta name="description" content="BloxCraft Airlines BC-001: Das würfelförmige, flügellose Flugzeug für FlightGear.">
+<meta name="description" content="BloxCraft Airlines BC-001: Originales FlightGear-Modell interaktiv ansehen und Sounds testen.">
 <title>BloxCraft Airlines | BC-001</title>
 <style>
-:root{color-scheme:light;--ink:#17191c;--muted:#68717b;--line:#e3e6e9;--paper:#f5f6f7;--white:#fff;--blue:#275d91;--blue2:#eaf2fa}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
-header{height:72px;display:flex;align-items:center;border-bottom:1px solid var(--line);background:#ffffffd9;backdrop-filter:blur(14px);position:sticky;top:0;z-index:10}.nav{display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800;letter-spacing:-.04em;font-size:18px}.brand span{color:var(--blue)}nav{display:flex;gap:26px;color:#515b66;font-size:14px}nav a:hover{color:var(--blue)}.hero{padding:94px 0 76px;background:radial-gradient(circle at 78% 40%,#dce8f4 0,transparent 30%),linear-gradient(120deg,#fff 0%,#f5f6f7 65%);border-bottom:1px solid var(--line)}.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:800}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:45px;align-items:center}.hero h1{font-size:clamp(48px,7vw,82px);line-height:.98;letter-spacing:-.075em;margin:18px 0 22px}.hero p{font-size:18px;color:var(--muted);max-width:540px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;padding:12px 18px;border-radius:8px;background:var(--ink);color:white;font-weight:700;font-size:14px}.btn.secondary{background:white;color:var(--ink);border:1px solid var(--line)}.cube-stage{min-height:340px;display:grid;place-items:center;perspective:800px}.cube{width:190px;height:190px;position:relative;transform-style:preserve-3d;transform:rotateX(-22deg) rotateY(-34deg);animation:float 7s ease-in-out infinite}.face{position:absolute;width:190px;height:190px;border:1px solid #858d95;background:linear-gradient(145deg,#aeb4ba,#737b84);box-shadow:inset 0 0 25px #ffffff22}.front{transform:translateZ(95px)}.back{transform:rotateY(180deg) translateZ(95px)}.right{transform:rotateY(90deg) translateZ(95px);background:#69727c}.left{transform:rotateY(-90deg) translateZ(95px);background:#929aa2}.top{transform:rotateX(90deg) translateZ(95px);background:#c4c9ce}.bottom{transform:rotateX(-90deg) translateZ(95px);background:#5e6670}.window{position:absolute;left:62px;top:44px;width:66px;height:58px;background:#244d69;border:5px solid #333b42;box-shadow:inset 0 0 15px #a8d9f7;transform:translateZ(97px)}.nozzle{position:absolute;width:62px;height:62px;background:#30353b;border:9px solid #525b64;transform:rotateY(90deg) translateZ(-125px) translateX(0);left:-125px;top:64px;border-radius:4px}.spec-strip{display:flex;gap:30px;margin-top:50px}.spec strong{display:block;font-size:22px;letter-spacing:-.04em}.spec small{color:var(--muted);font-size:12px}@keyframes float{0%,100%{transform:rotateX(-22deg) rotateY(-34deg) translateY(0)}50%{transform:rotateX(-18deg) rotateY(-20deg) translateY(-13px)}}
-section{padding:76px 0;border-bottom:1px solid var(--line)}.section-head{max-width:650px;margin-bottom:34px}.section-head h2{font-size:36px;letter-spacing:-.055em;line-height:1.1;margin:8px 0 12px}.section-head p{color:var(--muted);margin:0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:23px}.card .num{font-size:12px;color:var(--blue);font-weight:800;letter-spacing:.1em}.card h3{margin:10px 0 6px;font-size:18px}.card p{margin:0;color:var(--muted);font-size:14px}.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:0 34px;background:white;border:1px solid var(--line);border-radius:12px;padding:8px 24px}.control{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}.control:nth-last-child(-n+2){border-bottom:0}.key{font-weight:800;background:#f0f2f4;border:1px solid #d9dde1;border-bottom-width:3px;border-radius:6px;min-width:36px;text-align:center;padding:3px 9px;font-size:13px}.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#58616b}.dot{width:8px;height:8px;border-radius:50%;background:#c58a32}.install{background:#17212b;color:white;border-radius:14px;padding:34px;display:flex;justify-content:space-between;align-items:center;gap:25px}.install h2{font-size:30px;line-height:1.1;letter-spacing:-.05em;margin:0 0 10px}.install p{color:#c0cad3;margin:0}.install .btn{background:white;color:#17212b;white-space:nowrap}footer{padding:28px 0;color:var(--muted);font-size:13px}.foot{display:flex;justify-content:space-between;gap:20px}
-@media(max-width:760px){nav{gap:13px;font-size:12px}.hero{padding:65px 0}.hero-grid{grid-template-columns:1fr;gap:20px}.cube-stage{min-height:270px}.spec-strip{gap:18px;flex-wrap:wrap}.cards{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.control:nth-last-child(2){border-bottom:1px solid var(--line)}.control:last-child{border-bottom:0}.install{align-items:flex-start;flex-direction:column}.foot{flex-direction:column}.section-head h2{font-size:30px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
-</style></head>
+:root{color-scheme:light;--ink:#17191c;--muted:#68717b;--line:#e3e6e9;--paper:#f5f6f7;--white:#fff;--blue:#275d91;--blue2:#eaf2fa;--green:#23845b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}
+header{height:70px;display:flex;align-items:center;border-bottom:1px solid var(--line);background:#ffffffed;position:sticky;top:0;z-index:20}.nav{display:flex;align-items:center;justify-content:space-between}.brand{font-weight:850;letter-spacing:-.04em;font-size:18px}.brand span{color:var(--blue)}nav{display:flex;gap:24px;color:#515b66;font-size:14px}nav a:hover{color:var(--blue)}
+.hero{padding:76px 0 58px;background:radial-gradient(circle at 80% 30%,#dce8f4 0,transparent 32%),linear-gradient(120deg,#fff 0%,#f5f6f7 65%);border-bottom:1px solid var(--line)}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:45px;align-items:center}.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:800}.hero h1{font-size:clamp(48px,7vw,82px);line-height:.98;letter-spacing:-.075em;margin:18px 0 22px}.hero p{font-size:18px;color:var(--muted);max-width:550px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 17px;border-radius:8px;background:var(--ink);color:white;font-weight:700;font-size:14px;border:1px solid var(--ink);cursor:pointer}.btn.secondary{background:white;color:var(--ink);border-color:var(--line)}.spec-strip{display:flex;gap:30px;margin-top:42px}.spec strong{display:block;font-size:22px;letter-spacing:-.04em}.spec small{color:var(--muted);font-size:12px}
+section{padding:72px 0;border-bottom:1px solid var(--line)}.section-head{max-width:720px;margin-bottom:28px}.section-head h2{font-size:clamp(30px,4vw,40px);letter-spacing:-.055em;line-height:1.1;margin:8px 0 12px}.section-head p{color:var(--muted);margin:0}.viewer-shell{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 18px 55px #17212b0b}.viewer-top{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line)}.viewer-title{font-weight:800;font-size:14px}.viewer-status{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}.status-dot{width:8px;height:8px;border-radius:50%;background:#c58a32}.status-dot.ready{background:var(--green)}#viewer{height:510px;position:relative;background:radial-gradient(ellipse at 50% 42%,#ffffff 0%,#eef2f6 75%,#e8edf2 100%);touch-action:none}#viewer canvas{display:block;width:100%;height:100%;outline:0}.viewer-hint{position:absolute;left:16px;bottom:13px;color:#66717c;background:#ffffffd9;border:1px solid #dfe4e9;border-radius:7px;padding:6px 10px;font-size:11px;pointer-events:none}.viewer-error{position:absolute;inset:0;display:none;place-items:center;padding:30px;text-align:center;color:#8a3434;background:#fff}.viewer-error.show{display:grid}
+.preview-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:20px}.panel h3{font-size:16px;margin:0 0 4px}.panel-intro{color:var(--muted);font-size:13px;margin:0 0 17px}.button-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.control-btn{background:#f7f8fa;border:1px solid #dfe4e9;border-radius:8px;padding:11px 12px;text-align:left;font:inherit;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:46px}.control-btn:hover{border-color:#9bb6cf;background:#f0f5fa}.control-btn.active{background:var(--blue2);border-color:#9db8d3;color:#1d4c76}.key{font-size:11px;color:#68717b;background:#fff;border:1px solid #d9dee4;border-radius:5px;padding:2px 7px}.sound-list{display:grid;gap:9px}.sound-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #edf0f2;padding:7px 0 12px}.sound-row:last-child{border-bottom:0;padding-bottom:0}.sound-info strong{display:block;font-size:13px}.sound-info small{display:block;color:var(--muted);font-size:11px}.sound-play{border:1px solid #dfe4e9;border-radius:7px;background:white;padding:7px 11px;font-size:12px;font-weight:750;cursor:pointer;white-space:nowrap}.sound-play:hover{border-color:#9bb6cf}.sound-play.playing{background:var(--blue2);border-color:#9db8d3;color:#1d4c76}.note{font-size:12px;color:var(--muted);margin:13px 0 0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}.card .num{font-size:12px;color:var(--blue);font-weight:800;letter-spacing:.1em}.card h3{margin:10px 0 6px;font-size:18px}.card p{margin:0;color:var(--muted);font-size:14px}.controls{display:grid;grid-template-columns:repeat(2,1fr);gap:0 34px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 24px}.control{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}.keycap{font-weight:800;background:#f0f2f4;border:1px solid #d9dde1;border-bottom-width:3px;border-radius:6px;min-width:36px;text-align:center;padding:3px 9px;font-size:13px}.install{background:#17212b;color:white;border-radius:14px;padding:34px;display:flex;justify-content:space-between;align-items:center;gap:25px}.install h2{font-size:30px;line-height:1.1;letter-spacing:-.05em;margin:0 0 10px}.install p{color:#c0cad3;margin:0}.install .btn{background:white;color:#17212b;border-color:white;white-space:nowrap}footer{padding:28px 0;color:var(--muted);font-size:13px}.foot{display:flex;justify-content:space-between;gap:20px}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr}.preview-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}#viewer{height:430px}}
+@media(max-width:600px){header{height:auto;min-height:64px}.nav{align-items:flex-start;gap:10px;padding:14px 0;flex-direction:column}nav{gap:15px;flex-wrap:wrap;font-size:12px}.hero{padding:54px 0}.spec-strip{gap:18px;flex-wrap:wrap}#viewer{height:350px}.viewer-top{align-items:flex-start;flex-direction:column}.button-grid{grid-template-columns:1fr 1fr}.controls{grid-template-columns:1fr}.control:last-child{border-bottom:0}.install{align-items:flex-start;flex-direction:column}.foot{flex-direction:column}section{padding:55px 0}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}
+</script>
+</head>
 <body>
-<header><div class="wrap nav"><a class="brand" href="#">BLOXCRAFT <span>AIRLINES</span></a><nav><a href="#flugzeug">Flugzeug</a><a href="#funktionen">Funktionen</a><a href="#steuerung">Steuerung</a><a href="#download">Download</a></nav></div></header>
+<header><div class="wrap nav"><a class="brand" href="#top">BLOXCRAFT <span>AIRLINES</span></a><nav><a href="#modell">3D-Modell</a><a href="#sounds">Sounds</a><a href="#funktionen">Funktionen</a><a href="#steuerung">Steuerung</a><a href="#download">Download</a></nav></div></header>
 <main>
-<section class="hero" id="top"><div class="wrap hero-grid"><div><div class="eyebrow">FlightGear aircraft · Entwicklungsprojekt</div><h1>BC-001.<br>Einfach würfeln.</h1><p>Ein Flugzeug ohne Flügel. Mit exakt würfelförmigem Rumpf, drei Rädern und einem völlig überdimensionierten Nachbrenner. Aerodynamik war gestern.</p><div class="actions"><a class="btn" href="https://github.com/LordLOLQDH/BloxCraft-Airlines">Projekt auf GitHub ↗</a><a class="btn secondary" href="#steuerung">Steuerung ansehen</a></div><div class="spec-strip"><div class="spec"><strong>4 × 4 × 4 m</strong><small>Würfelrumpf</small></div><div class="spec"><strong>3</strong><small>Quadratische Räder</small></div><div class="spec"><strong>0</strong><small>Flügel</small></div></div></div><div class="cube-stage" aria-label="Schematische Darstellung des würfelförmigen Flugzeugs"><div class="cube"><div class="face front"></div><div class="face back"></div><div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div><div class="window"></div></div></div></div></section>
-<section id="flugzeug"><div class="wrap"><div class="section-head"><div class="eyebrow">Das Konzept</div><h2>Ein Würfel, der fliegen soll.</h2><p>Die BC-001 ist als bewusst absurdes, flügelloses FlightGear-Flugzeug gedacht. Das Modell und die Steuerlogik werden schrittweise ausgebaut.</p></div><div class="cards"><article class="card"><div class="num">01 / AIRFRAME</div><h3>Geometrischer Rumpf</h3><p>Matte graue Oberfläche, harte 90-Grad-Kanten und ein einzelnes quadratisches Frontfenster.</p></article><article class="card"><div class="num">02 / PROPULSION</div><h3>Heck-Nachbrenner</h3><p>Ein riesiger Heckauslass liefert den Schub. Die angestrebte Mach-10-Beschleunigung ist ein Projektziel, kein bestätigter Messwert.</p></article><article class="card"><div class="num">03 / LANDING</div><h3>Kreative Landetechnik</h3><p>Drei abwerfbare Räder, ein ausfahrbares Luftkissen und ein manuell oder automatisch auslösbarer Fallschirm.</p></article></div></div></section>
-<section id="funktionen"><div class="wrap"><div class="section-head"><div class="eyebrow">Systeme an Bord</div><h2>Mehr Funktionen als Flügel.</h2><p>Die sichtbaren Modellteile und Steuerzustände werden im Simulator weiter verbunden. Physik und Verhalten müssen anschließend im FlightGear-Test überprüft werden.</p></div><div class="cards"><article class="card"><div class="num">ENGINE</div><h3>Motor & Nachbrenner</h3><p>Motorstart und -stopp sowie zuschaltbarer Nachbrenner.</p></article><article class="card"><div class="num">EMERGENCY</div><h3>Notfall-Systeme</h3><p>Räder abwerfen, Luftkissen ausfahren und Fallschirm auslösen. Taste E simuliert einen Triebwerksausfall.</p></article><article class="card"><div class="num">RADIO</div><h3>Radio & Disco</h3><p>Unabhängiger Radiomodus mit Musik, Bass-Reaktion und farbiger Beleuchtung. Audiodateien werden separat ergänzt.</p></article></div></div></section>
+<section class="hero" id="top"><div class="wrap hero-grid"><div><div class="eyebrow">FlightGear aircraft · Entwicklungsprojekt</div><h1>BC-001.<br>Einfach würfeln.</h1><p>Ein Flugzeug ohne Flügel. Mit exakt würfelförmigem Rumpf, drei Rädern und einem völlig überdimensionierten Nachbrenner. Aerodynamik war gestern.</p><div class="actions"><a class="btn" href="https://github.com/LordLOLQDH/BloxCraft-Airlines">Projekt auf GitHub ↗</a><a class="btn secondary" href="#modell">3D-Modell ansehen</a></div><div class="spec-strip"><div class="spec"><strong>4 × 4 × 4 m</strong><small>Würfelrumpf</small></div><div class="spec"><strong>3</strong><small>Quadratische Räder</small></div><div class="spec"><strong>0</strong><small>Flügel</small></div></div></div><div class="card"><div class="num">ORIGINAL ASSET</div><h3>Kein Render, kein Ersatzmodell.</h3><p>Der Viewer lädt die originale AC3D-Datei aus dem Repository. Die Geometrie und Materialfarben stammen direkt aus dem Modell, das auch FlightGear lädt.</p><p class="note">Die Website ist ein Modell-Viewer. Sie startet nicht FlightGear im Browser.</p></div></div></section>
+
+<section id="modell"><div class="wrap"><div class="section-head"><div class="eyebrow">Interaktive Modellvorschau</div><h2>Die echte BC-001. Direkt aus der Modelldatei.</h2><p>Mit dem Finger oder der Maus drehen, zum Zoomen scrollen oder zwei Finger verwenden. Die Vorschau lädt <code>Models/bloxcraft.ac</code> und verwendet dieselben benannten Modellteile wie die FlightGear-Animationsdefinition.</p></div>
+<div class="viewer-shell"><div class="viewer-top"><div class="viewer-title">BC-001 / 3D MODEL VIEWER</div><div class="viewer-status"><span class="status-dot" id="modelDot"></span><span id="modelStatus">Originalmodell wird geladen …</span></div></div><div id="viewer"><div class="viewer-hint">Ziehen: drehen · Scrollen / Pinch: zoomen</div><div class="viewer-error" id="viewerError"></div></div></div>
+<div class="preview-grid">
+<div class="panel"><h3>Modell & Animationen</h3><p class="panel-intro">Diese Schalter verändern die geladenen Meshes der Originaldatei.</p><div class="button-grid">
+<button class="control-btn" id="engineBtn">Triebwerk starten <span class="key">I</span></button>
+<button class="control-btn" id="afterburnerBtn">Nachbrennerflamme <span class="key">A</span></button>
+<button class="control-btn" id="wheelsBtn">Räder abwerfen <span class="key">H</span></button>
+<button class="control-btn" id="cushionBtn">Luftkissen ausfahren <span class="key">G</span></button>
+<button class="control-btn" id="popBtn">Luftkissen platzen lassen</button>
+<button class="control-btn" id="parachuteBtn">Fallschirm ausfahren <span class="key">P</span></button>
+<button class="control-btn" id="discoBtn">Disco / Radio <span class="key">R</span></button>
+<button class="control-btn" id="resetBtn">Vorschau zurücksetzen</button>
+</div><p class="note">E simuliert im FlightGear einen Triebwerksausfall. In der Vorschau kannst du den Fallschirm direkt auslösen. Der Nachbrenner hat absichtlich keinen eigenen Sound.</p></div>
+<div class="panel" id="sounds"><h3>Alle Sounds anhören</h3><p class="panel-intro">Die vier Originaldateien aus dem Ordner Sounds/.</p><div class="sound-list">
+<div class="sound-row"><div class="sound-info"><strong>Engine Start</strong><small>engine-start.ogg · einmalig</small></div><button class="sound-play" data-audio="start">Abspielen</button></div>
+<div class="sound-row"><div class="sound-info"><strong>Engine Stop</strong><small>engine-stop.ogg · einmalig</small></div><button class="sound-play" data-audio="stop">Abspielen</button></div>
+<div class="sound-row"><div class="sound-info"><strong>Normaler Flug</strong><small>engine-loop.ogg · Schleife</small></div><button class="sound-play" data-audio="engine">Abspielen</button></div>
+<div class="sound-row"><div class="sound-info"><strong>Radio</strong><small>radio-song.ogg · Schleife</small></div><button class="sound-play" data-audio="radio">Abspielen</button></div>
+</div><p class="note">Browser geben Audio erst nach einer Nutzeraktion wieder. Loop-Sounds lassen sich über denselben Button stoppen.</p></div>
+</div></div></section>
+
+<section id="funktionen"><div class="wrap"><div class="section-head"><div class="eyebrow">Systeme an Bord</div><h2>Mehr Funktionen als Flügel.</h2><p>Die Vorschau zeigt die tatsächlichen Modellteile. Flugphysik und Systemverhalten werden separat in FlightGear ausgeführt.</p></div><div class="cards"><article class="card"><div class="num">01 / AIRFRAME</div><h3>Geometrischer Rumpf</h3><p>Matte graue Oberfläche, harte 90-Grad-Kanten und ein quadratisches Frontfenster.</p></article><article class="card"><div class="num">02 / PROPULSION</div><h3>Heck-Nachbrenner</h3><p>Ein riesiger Heckauslass mit zuschaltbarer visueller Flamme. Kein separater Nachbrenner-Sound.</p></article><article class="card"><div class="num">03 / LANDING</div><h3>Kreative Landetechnik</h3><p>Drei Räder, ein ausfahrbares Luftkissen und ein manuell oder automatisch auslösbarer Fallschirm.</p></article></div></div></section>
 <section id="steuerung"><div class="wrap"><div class="section-head"><div class="eyebrow">Keyboard</div><h2>Steuerung der BC-001</h2><p>Die Tastenbelegung im aktuellen Projektstand.</p></div><div class="controls">
-<div class="control"><span>Triebwerk starten / stoppen</span><span class="key">I</span></div><div class="control"><span>Nachbrenner umschalten</span><span class="key">A</span></div><div class="control"><span>Räder abwerfen</span><span class="key">H</span></div><div class="control"><span>Landekissen ausfahren</span><span class="key">G</span></div><div class="control"><span>Fallschirm manuell</span><span class="key">P</span></div><div class="control"><span>Triebwerksausfall simulieren</span><span class="key">E</span></div><div class="control"><span>Radio / Disco-Modus</span><span class="key">R</span></div></div></div></section>
-<section id="download"><div class="wrap"><div class="install"><div><h2>Bereit für FlightGear?</h2><p>Quellcode, Modell und Installationshinweise liegen im öffentlichen GitHub-Repository.</p></div><a class="btn" href="https://github.com/LordLOLQDH/BloxCraft-Airlines">Repository öffnen ↗</a></div></div></section>
+<div class="control"><span>Triebwerk starten / stoppen</span><span class="keycap">I</span></div><div class="control"><span>Nachbrenner umschalten</span><span class="keycap">A</span></div><div class="control"><span>Räder abwerfen</span><span class="keycap">H</span></div><div class="control"><span>Landekissen ausfahren</span><span class="keycap">G</span></div><div class="control"><span>Fallschirm manuell</span><span class="keycap">P</span></div><div class="control"><span>Triebwerksausfall simulieren</span><span class="keycap">E</span></div><div class="control"><span>Radio / Disco-Modus</span><span class="keycap">R</span></div></div></div></section>
+<section id="download"><div class="wrap"><div class="install"><div><h2>Bereit für FlightGear?</h2><p>Quellcode, Originalmodell, Sounds und Installationshinweise liegen im GitHub-Repository.</p></div><a class="btn" href="https://github.com/LordLOLQDH/BloxCraft-Airlines">Repository öffnen ↗</a></div></div></section>
 </main><footer><div class="wrap foot"><span>© BloxCraft Airlines · BC-001</span><span>Ein unabhängiges FlightGear-Communityprojekt · Kein echtes Luftfahrzeug</span></div></footer>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const viewer=document.getElementById('viewer');
+const status=document.getElementById('modelStatus');
+const dot=document.getElementById('modelDot');
+const errorBox=document.getElementById('viewerError');
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0xeef2f6);
+const camera=new THREE.PerspectiveCamera(42,1,0.05,150);
+camera.position.set(8.6,6.4,8.6);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.12;
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+viewer.prepend(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;
+controls.dampingFactor=.06;
+controls.minDistance=4.2;
+controls.maxDistance=24;
+controls.target.set(0,0,0);
+scene.add(new THREE.HemisphereLight(0xffffff,0x7b8794,2.1));
+const keyLight=new THREE.DirectionalLight(0xffffff,3.0);keyLight.position.set(-5,9,7);keyLight.castShadow=true;scene.add(keyLight);
+const fillLight=new THREE.DirectionalLight(0xd9e9ff,1.35);fillLight.position.set(7,4,-6);scene.add(fillLight);
+const rimLight=new THREE.DirectionalLight(0xffffff,1.0);rimLight.position.set(2,3,8);scene.add(rimLight);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:0xe7ebef,roughness:.92}));
+floor.rotation.x=-Math.PI/2;floor.position.y=-2.72;floor.receiveShadow=true;scene.add(floor);
+const grid=new THREE.GridHelper(40,40,0xc6d0da,0xdce2e8);grid.position.y=-2.715;scene.add(grid);
+const aircraftRoot=new THREE.Group();aircraftRoot.rotation.x=-Math.PI/2;scene.add(aircraftRoot);
+const objects=new Map();
+let modelReady=false,engineOn=false,afterburnerOn=false,wheelsOut=false,cushionOut=false,parachuteOut=false,discoOn=false,discoPhase=0;
+let wheelStart=[],fuselageMesh=null,flame=null,lastTick=0;
+const materialCache=[];
+function parseMaterial(line){
+ const m=line.match(/^MATERIAL\s+"([^"]+)"\s+rgb\s+([-\d.eE]+)\s+([-\d.eE]+)\s+([-\d.eE]+)\s+amb\s+([-\d.eE]+)\s+([-\d.eE]+)\s+([-\d.eE]+)\s+emis\s+([-\d.eE]+)\s+([-\d.eE]+)\s+([-\d.eE]+)\s+spec\s+([-\d.eE]+)\s+([-\d.eE]+)\s+([-\d.eE]+)\s+shi\s+([-\d.eE]+)(?:\s+trans\s+([-\d.eE]+))?/);
+ if(!m)return null;
+ const n=m.slice(2,5).map(Number),em=m.slice(8,11).map(Number),tr=Number(m[15]||0),shi=Number(m[14]||8);
+ const color=new THREE.Color(n[0],n[1],n[2]);
+ const emissive=new THREE.Color(em[0],em[1],em[2]);
+ return new THREE.MeshStandardMaterial({name:m[1],color,emissive,emissiveIntensity:em.some(v=>v>0)?1.5:0,roughness:Math.max(.22,Math.min(.95,1-shi/110)),metalness:.12,transparent:tr>0,opacity:1-tr,side:THREE.DoubleSide});
+}
+function parseAC3D(source){
+ const lines=source.replace(/\r/g,'').split('\n');
+ const materials=[];
+ for(const line of lines){if(line.startsWith('MATERIAL ')){const mat=parseMaterial(line);if(mat)materials.push(mat);}}
+ let built=0;
+ for(let i=0;i<lines.length;i++){
+  if(lines[i].trim()!=='OBJECT poly')continue;
+  let end=i+1;while(end<lines.length&&!lines[end].startsWith('OBJECT '))end++;
+  const block=lines.slice(i,end);let name='unnamed';
+  const nameLine=block.find(l=>l.startsWith('name '));if(nameLine)name=nameLine.slice(6).replace(/^"|"$/g,'');
+  const vi=block.findIndex(l=>l.startsWith('numvert '));if(vi<0){i=end-1;continue;}
+  const vertexCount=Number(block[vi].split(/\s+/)[1]);const vertices=[];
+  for(let k=0;k<vertexCount;k++){const v=block[vi+1+k].trim().split(/\s+/).map(Number);vertices.push(v);}
+  const si=block.findIndex((l,k)=>k>vi&&l.startsWith('numsurf '));if(si<0){i=end-1;continue;}
+  const surfaceCount=Number(block[si].split(/\s+/)[1]);let p=si+1;
+  const buckets=new Map();
+  for(let s=0;s<surfaceCount;s++){
+   while(p<block.length&&!block[p].startsWith('SURF '))p++;
+   if(p>=block.length)break;
+   p++;const matLine=block[p++]||'mat 0';const matId=Number(matLine.trim().split(/\s+/)[1]||0);
+   const refsLine=block[p++]||'refs 0';const refCount=Number(refsLine.trim().split(/\s+/)[1]||0);const refs=[];
+   for(let r=0;r<refCount;r++){const a=(block[p++]||'').trim().split(/\s+/).map(Number);if(a.length>=3&&vertices[a[0]])refs.push({v:vertices[a[0]],uv:[a[1],a[2]]});}
+   if(refs.length<3)continue;
+   if(!buckets.has(matId))buckets.set(matId,{pos:[],uv:[]});
+   const b=buckets.get(matId);
+   for(let t=1;t<refs.length-1;t++)for(const q of [refs[0],refs[t],refs[t+1]]){b.pos.push(q.v[0],q.v[1],q.v[2]);b.uv.push(q.uv[0],q.uv[1]);}
+  }
+  const group=new THREE.Group();group.name=name;
+  for(const [matId,b] of buckets){
+   const geometry=new THREE.BufferGeometry();
+   geometry.setAttribute('position',new THREE.Float32BufferAttribute(b.pos,3));
+   geometry.setAttribute('uv',new THREE.Float32BufferAttribute(b.uv,2));
+   geometry.computeVertexNormals();
+   const material=materials[matId]||new THREE.MeshStandardMaterial({color:0x888888,side:THREE.DoubleSide});
+   const mesh=new THREE.Mesh(geometry,material);mesh.castShadow=true;mesh.receiveShadow=true;mesh.name=name+'-surface-'+matId;group.add(mesh);
+  }
+  aircraftRoot.add(group);objects.set(name,group);built++;i=end-1;
+ }
+ if(built<10)throw new Error('Das AC3D-Modell konnte nicht vollständig gelesen werden ('+built+' Objekte).');
+ return built;
+}
+function setVisible(name,value){const o=objects.get(name);if(o)o.visible=value;}
+function setButton(id,active,labelOn,labelOff){const b=document.getElementById(id);b.classList.toggle('active',!!active);if(labelOn&&labelOff)b.childNodes[0].textContent=active?labelOn:labelOff;}
+function animateMove(obj,target,duration=650){if(!obj)return;const from=obj.position.z,to=target,start=performance.now();function step(now){const t=Math.min(1,(now-start)/duration),e=1-Math.pow(1-t,3);obj.position.z=from+(to-from)*e;if(t<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+function updateDiscoVisibility(){const names=['blue','green','red','white'];names.forEach((n,i)=>{const active=discoOn&&i===discoPhase;setVisible('disco-lamp-'+n,active);setVisible('disco-beam-'+n,active);});}
+function resetPreview(){
+ engineOn=false;afterburnerOn=false;wheelsOut=false;cushionOut=false;parachuteOut=false;discoOn=false;discoPhase=0;
+ setVisible('afterburner-flame',false);setVisible('landing-cushion',false);setVisible('parachute',false);updateDiscoVisibility();
+ for(const w of wheelStart)animateMove(w.obj,w.z,250);
+ if(fuselageMesh)fuselageMesh.position.z=0;
+ setButton('engineBtn',false,'Triebwerk stoppen','Triebwerk starten');
+ setButton('afterburnerBtn',false);setButton('wheelsBtn',false);setButton('cushionBtn',false);setButton('parachuteBtn',false);setButton('discoBtn',false);
+ document.getElementById('wheelsBtn').disabled=false;document.getElementById('cushionBtn').disabled=false;
+}
+const audio={
+ start:new Audio('./Sounds/engine-start.ogg'),
+ stop:new Audio('./Sounds/engine-stop.ogg'),
+ engine:new Audio('./Sounds/engine-loop.ogg'),
+ radio:new Audio('./Sounds/radio-song.ogg')
+};
+audio.engine.loop=true;audio.radio.loop=true;
+Object.values(audio).forEach(a=>{a.preload='auto';a.volume=.82;});
+function playOnce(a){a.pause();a.currentTime=0;return a.play().catch(()=>{});}
+function toggleLoop(key,button){
+ const a=audio[key];
+ if(!a.paused){a.pause();button.classList.remove('playing');button.textContent='Abspielen';return;}
+ a.play().then(()=>{button.classList.add('playing');button.textContent='Stoppen';}).catch(()=>{button.textContent='Erneut versuchen';});
+}
+document.querySelectorAll('[data-audio]').forEach(b=>b.addEventListener('click',()=>{
+ const key=b.dataset.audio;
+ if(key==='start'||key==='stop'){playOnce(audio[key]);b.textContent='Läuft …';setTimeout(()=>b.textContent='Abspielen',1800);}
+ else toggleLoop(key,b);
+}));
+document.getElementById('engineBtn').addEventListener('click',()=>{
+ if(!engineOn){engineOn=true;playOnce(audio.start);setButton('engineBtn',true,'Triebwerk stoppen','Triebwerk starten');setTimeout(()=>{if(engineOn)audio.engine.play().catch(()=>{});},900);}
+ else{engineOn=false;audio.engine.pause();audio.engine.currentTime=0;playOnce(audio.stop);setButton('engineBtn',false,'Triebwerk stoppen','Triebwerk starten');}
+});
+document.getElementById('afterburnerBtn').addEventListener('click',()=>{afterburnerOn=!afterburnerOn;setVisible('afterburner-flame',afterburnerOn);setButton('afterburnerBtn',afterburnerOn);});
+document.getElementById('wheelsBtn').addEventListener('click',()=>{
+ if(wheelsOut)return;wheelsOut=true;for(const w of wheelStart)animateMove(w.obj,w.z-5);setButton('wheelsBtn',true);document.getElementById('wheelsBtn').disabled=true;
+});
+document.getElementById('cushionBtn').addEventListener('click',()=>{if(cushionOut)return;cushionOut=true;setVisible('landing-cushion',true);setButton('cushionBtn',true);});
+document.getElementById('popBtn').addEventListener('click',()=>{if(!cushionOut)return;cushionOut=false;setVisible('landing-cushion',false);setButton('cushionBtn',false);});
+document.getElementById('parachuteBtn').addEventListener('click',()=>{parachuteOut=!parachuteOut;setVisible('parachute',parachuteOut);setButton('parachuteBtn',parachuteOut);});
+document.getElementById('discoBtn').addEventListener('click',()=>{
+ discoOn=!discoOn;setButton('discoBtn',discoOn);
+ if(discoOn){audio.radio.play().catch(()=>{});discoPhase=0;updateDiscoVisibility();}
+ else{audio.radio.pause();audio.radio.currentTime=0;updateDiscoVisibility();}
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{
+ resetPreview();audio.engine.pause();audio.engine.currentTime=0;audio.radio.pause();audio.radio.currentTime=0;
+ document.querySelectorAll('.sound-play').forEach(b=>{b.classList.remove('playing');b.textContent='Abspielen';});
+});
+async function loadOriginalModel(){
+ try{
+  const response=await fetch('./Models/bloxcraft.ac',{cache:'no-cache'});if(!response.ok)throw new Error('HTTP '+response.status+' beim Laden von Models/bloxcraft.ac');
+  const source=await response.text();const count=parseAC3D(source);
+  for(const name of ['afterburner-flame','landing-cushion','parachute','disco-lamp-blue','disco-lamp-green','disco-lamp-red','disco-lamp-white','disco-beam-blue','disco-beam-green','disco-beam-red','disco-beam-white'])setVisible(name,false);
+  for(const name of ['wheel-nose','wheel-left','wheel-right']){const obj=objects.get(name);if(obj)wheelStart.push({obj,z:obj.position.z});}
+  fuselageMesh=objects.get('fuselage');
+  flame=objects.get('afterburner-flame');
+  modelReady=true;status.textContent='Originalmodell geladen · '+count+' Modellteile';dot.classList.add('ready');
+  resetPreview();
+ }catch(err){console.error(err);status.textContent='Modell konnte nicht geladen werden';errorBox.classList.add('show');errorBox.textContent='Die echte Modelldatei konnte nicht geladen werden. '+err.message+' Bitte die Website über GitHub Pages öffnen, nicht als lokale Datei.';}
+}
+function resize(){
+ const w=viewer.clientWidth,h=viewer.clientHeight;
+ renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+}
+window.addEventListener('resize',resize);resize();
+let previous=0;
+function render(now){
+ requestAnimationFrame(render);const dt=Math.min(.05,(now-previous)/1000||0);previous=now;
+ if(discoOn){lastTick+=dt;if(lastTick>=.25){lastTick=0;discoPhase=(discoPhase+1)%4;updateDiscoVisibility();if(fuselageMesh)fuselageMesh.position.z=discoPhase===0?.035:.00875;}}
+ if(afterburnerOn&&flame){const pulse=.96+Math.sin(now*.018)*.06;flame.scale.set(1,pulse,pulse);}
+ controls.update();renderer.render(scene,camera);
+}
+requestAnimationFrame(render);loadOriginalModel();
+</script>
 </body></html>
