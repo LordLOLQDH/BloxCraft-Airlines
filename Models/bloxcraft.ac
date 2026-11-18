@@ -1,0 +1,568 @@
+AC3Db
+MATERIAL "matte-grey" rgb 0.42 0.44 0.46 amb 0.22 0.22 0.22 emis 0 0 0 spec 0.12 0.12 0.12 shi 8
+MATERIAL "dark-metal" rgb 0.10 0.11 0.12 amb 0.05 0.05 0.05 emis 0 0 0 spec 0.18 0.18 0.18 shi 12
+MATERIAL "window-blue" rgb 0.10 0.35 0.52 amb 0.05 0.15 0.22 emis 0.01 0.02 0.03 spec 0.7 0.8 0.9 shi 64
+MATERIAL "engine-orange" rgb 1.0 0.25 0.02 amb 0.3 0.06 0.01 emis 0.8 0.12 0.01 spec 0.2 0.1 0.05 shi 8
+MATERIAL "cushion" rgb 0.78 0.80 0.84 amb 0.3 0.3 0.3 emis 0 0 0 spec 0.15 0.15 0.15 shi 10
+OBJECT world
+kids 10
+OBJECT poly
+name "fuselage"
+crease 45.000
+numvert 8
+-2 -2 -2
+2 -2 -2
+2 2 -2
+-2 2 -2
+-2 -2 2
+2 -2 2
+2 2 2
+-2 2 2
+numsurf 6
+SURF 0x30
+mat 0
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 0
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 0
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 0
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 0
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 0
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "front-window"
+crease 45.000
+numvert 8
+-2.055 -0.72 0.12
+-2.015 -0.72 0.12
+-2.015 0.72 0.12
+-2.055 0.72 0.12
+-2.055 -0.72 1.18
+-2.015 -0.72 1.18
+-2.015 0.72 1.18
+-2.055 0.72 1.18
+numsurf 6
+SURF 0x30
+mat 2
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 2
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 2
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 2
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 2
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 2
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "cockpit-instruction-placard"
+crease 45.000
+numvert 8
+-2.06 -0.78 -1.25
+-2.015 -0.78 -1.25
+-2.015 0.78 -1.25
+-2.06 0.78 -1.25
+-2.06 -0.78 -0.45
+-2.015 -0.78 -0.45
+-2.015 0.78 -0.45
+-2.06 0.78 -0.45
+numsurf 6
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 1
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 1
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 1
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 1
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "engine-nozzle"
+crease 45.000
+numvert 8
+1.98 -0.72 -0.72
+2.42 -0.72 -0.72
+2.42 0.72 -0.72
+1.98 0.72 -0.72
+1.98 -0.72 0.72
+2.42 -0.72 0.72
+2.42 0.72 0.72
+1.98 0.72 0.72
+numsurf 6
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 1
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 1
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 1
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 1
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "afterburner-flame"
+crease 45.000
+numvert 8
+2.42 -0.45 -0.45
+3.55 -0.45 -0.45
+3.55 0.45 -0.45
+2.42 0.45 -0.45
+2.42 -0.45 0.45
+3.55 -0.45 0.45
+3.55 0.45 0.45
+2.42 0.45 0.45
+numsurf 6
+SURF 0x30
+mat 3
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 3
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 3
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 3
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 3
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 3
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "wheel-nose"
+crease 45.000
+numvert 8
+-1.25 -0.32 -2.58
+-0.72 -0.32 -2.58
+-0.72 0.32 -2.58
+-1.25 0.32 -2.58
+-1.25 -0.32 -2.1
+-0.72 -0.32 -2.1
+-0.72 0.32 -2.1
+-1.25 0.32 -2.1
+numsurf 6
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 1
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 1
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 1
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 1
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "wheel-left"
+crease 45.000
+numvert 8
+1.05 -1.48 -2.58
+1.58 -1.48 -2.58
+1.58 -0.98 -2.58
+1.05 -0.98 -2.58
+1.05 -1.48 -2.1
+1.58 -1.48 -2.1
+1.58 -0.98 -2.1
+1.05 -0.98 -2.1
+numsurf 6
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 1
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 1
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 1
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 1
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "wheel-right"
+crease 45.000
+numvert 8
+1.05 0.98 -2.58
+1.58 0.98 -2.58
+1.58 1.48 -2.58
+1.05 1.48 -2.58
+1.05 0.98 -2.1
+1.58 0.98 -2.1
+1.58 1.48 -2.1
+1.05 1.48 -2.1
+numsurf 6
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 1
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 1
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 1
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 1
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 1
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "landing-cushion"
+crease 45.000
+numvert 8
+-0.85 -0.85 -2.45
+0.85 -0.85 -2.45
+0.85 0.85 -2.45
+-0.85 0.85 -2.45
+-0.85 -0.85 -2.18
+0.85 -0.85 -2.18
+0.85 0.85 -2.18
+-0.85 0.85 -2.18
+numsurf 6
+SURF 0x30
+mat 4
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 4
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 4
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 4
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 4
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 4
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
+OBJECT poly
+name "parachute"
+crease 45.000
+numvert 8
+-0.65 -0.65 2.05
+0.65 -0.65 2.05
+0.65 0.65 2.05
+-0.65 0.65 2.05
+-0.65 -0.65 2.42
+0.65 -0.65 2.42
+0.65 0.65 2.42
+-0.65 0.65 2.42
+numsurf 6
+SURF 0x30
+mat 3
+refs 4
+0 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x30
+mat 3
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x30
+mat 3
+refs 4
+0 0 0
+1 0 0
+5 0 0
+4 0 0
+SURF 0x30
+mat 3
+refs 4
+1 0 0
+2 0 0
+6 0 0
+5 0 0
+SURF 0x30
+mat 3
+refs 4
+2 0 0
+3 0 0
+7 0 0
+6 0 0
+SURF 0x30
+mat 3
+refs 4
+3 0 0
+0 0 0
+4 0 0
+7 0 0
+kids 0
