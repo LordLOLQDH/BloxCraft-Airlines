@@ -30,6 +30,7 @@ var toggleEngine = func {
         setprop("/controls/engines/engine[0]/throttle", 0);
         setprop("/controls/engines/engine[0]/starter", 0);
         setprop("/controls/engines/engine[0]/cutoff", 0);
+        setprop("/controls/engines/engine[0]/ignition", 0);
         setState("engine-running", 0);
         setState("engine-state", "OFF");
         playOneShot("engine-stop");
@@ -37,6 +38,7 @@ var toggleEngine = func {
         engineOn = 1;
         engineReady = 0;
         setprop("/controls/engines/engine[0]/cutoff", 0);
+        setprop("/controls/engines/engine[0]/ignition", 1);
         setprop("/controls/engines/engine[0]/starter", 1);
         setprop("/controls/engines/engine[0]/throttle", 0.20);
         setState("engine-running", 1);
@@ -96,6 +98,7 @@ var engineFailure = func {
     setprop("/controls/engines/engine[0]/throttle", 0);
     setprop("/controls/engines/engine[0]/starter", 0);
     setprop("/controls/engines/engine[0]/cutoff", 0);
+    setprop("/controls/engines/engine[0]/ignition", 0);
     setprop("/controls/engines/engine[0]/augmentation", 0);
     playOneShot("engine-stop");
     deployParachute();
