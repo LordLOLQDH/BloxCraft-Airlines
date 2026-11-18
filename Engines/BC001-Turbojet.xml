@@ -1,5 +1,69 @@
 <?xml version="1.0"?>
 <turbine_engine name="BC001-Turbojet">
-  <milthrust>180000</milthrust><maxthrust>260000</maxthrust><bypassratio>0.0</bypassratio><tsfc>1.15</tsfc><atsfc>2.10</atsfc>
-  <idlen1>0.0</idlen1><idlen2>53.0</idlen2><maxn1>100.0</maxn1><maxn2>100.0</maxn2><augmented>1</augmented><augmethod>1</augmethod><injected>0</injected>
+  <milthrust>180000</milthrust>
+  <maxthrust>260000</maxthrust>
+  <bypassratio>0.0</bypassratio>
+  <tsfc>1.15</tsfc>
+  <atsfc>2.10</atsfc>
+  <idlen1>0.0</idlen1>
+  <idlen2>53.0</idlen2>
+  <maxn1>100.0</maxn1>
+  <maxn2>100.0</maxn2>
+  <augmented>1</augmented>
+  <augmethod>1</augmethod>
+  <injected>0</injected>
+
+  <function name="IdleThrust">
+    <table>
+      <independentVar lookup="row">velocities/mach</independentVar>
+      <independentVar lookup="column">atmosphere/density-altitude</independentVar>
+      <tableData>
+        -10000 0 10000 20000 30000 40000 50000 60000
+        0.0 0.060 0.050 0.040 0.030 0.020 0.010 0.005 0.0
+        0.5 0.055 0.045 0.035 0.025 0.015 0.008 0.003 0.0
+        1.0 0.050 0.040 0.030 0.020 0.012 0.006 0.002 0.0
+        2.0 0.045 0.035 0.025 0.016 0.009 0.004 0.001 0.0
+        4.0 0.040 0.030 0.020 0.012 0.006 0.002 0.001 0.0
+        6.0 0.035 0.025 0.016 0.009 0.004 0.001 0.000 0.0
+        8.0 0.030 0.020 0.012 0.006 0.002 0.000 0.000 0.0
+        10.0 0.025 0.016 0.009 0.004 0.001 0.000 0.000 0.0
+      </tableData>
+    </table>
+  </function>
+
+  <function name="MilThrust">
+    <table>
+      <independentVar lookup="row">velocities/mach</independentVar>
+      <independentVar lookup="column">atmosphere/density-altitude</independentVar>
+      <tableData>
+        -10000 0 10000 20000 30000 40000 50000 60000
+        0.0 1.10 1.00 0.78 0.57 0.39 0.25 0.14 0.0
+        0.5 1.08 0.99 0.77 0.56 0.38 0.24 0.13 0.0
+        1.0 1.12 1.03 0.81 0.60 0.41 0.26 0.14 0.0
+        2.0 1.16 1.07 0.85 0.63 0.43 0.28 0.15 0.0
+        4.0 1.18 1.09 0.87 0.65 0.45 0.29 0.16 0.0
+        6.0 1.13 1.04 0.83 0.62 0.43 0.28 0.15 0.0
+        8.0 1.02 0.94 0.75 0.56 0.39 0.25 0.13 0.0
+        10.0 0.90 0.82 0.66 0.49 0.34 0.21 0.11 0.0
+      </tableData>
+    </table>
+  </function>
+
+  <function name="AugThrust">
+    <table>
+      <independentVar lookup="row">velocities/mach</independentVar>
+      <independentVar lookup="column">atmosphere/density-altitude</independentVar>
+      <tableData>
+        -10000 0 10000 20000 30000 40000 50000 60000
+        0.0 1.08 1.00 0.82 0.66 0.52 0.37 0.23 0.0
+        0.5 1.09 1.01 0.83 0.67 0.53 0.38 0.23 0.0
+        1.0 1.14 1.06 0.87 0.70 0.56 0.40 0.25 0.0
+        2.0 1.20 1.11 0.92 0.75 0.60 0.43 0.27 0.0
+        4.0 1.22 1.13 0.94 0.77 0.62 0.45 0.28 0.0
+        6.0 1.17 1.08 0.90 0.73 0.59 0.42 0.26 0.0
+        8.0 1.06 0.98 0.81 0.66 0.53 0.38 0.23 0.0
+        10.0 0.94 0.87 0.72 0.58 0.47 0.33 0.20 0.0
+      </tableData>
+    </table>
+  </function>
 </turbine_engine>
