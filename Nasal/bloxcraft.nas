@@ -41,7 +41,7 @@ var toggleEngine = func {
         setprop("/controls/engines/engine[0]/ignition", 1);
         setprop("/controls/engines/engine[0]/starter", 1);
         setprop("/controls/engines/engine[0]/throttle", 0.20);
-        setState("engine-running", 1);
+        setState("engine-running", 0);
         setState("engine-state", "STARTING");
         setState("engine-failure", 0);
         playOneShot("engine-start");
@@ -51,6 +51,7 @@ var toggleEngine = func {
                 setprop("/controls/engines/engine[0]/starter", 0);
                 setprop("/controls/engines/engine[0]/throttle", 0.65);
                 engineReady = 1;
+                setState("engine-running", 1);
                 setState("engine-state", "RUNNING");
             }
         }, 3.0);
@@ -153,5 +154,4 @@ setState("disco-light-phase", 0);
 setState("bass-pulse", 0);
 setState("sound/engine-start", 0);
 setState("sound/engine-stop", 0);
-setState("sound/afterburner-on", 0);
 monitorTimer = settimer(monitorLanding, 0.2);
