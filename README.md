@@ -4,7 +4,7 @@ A deliberately wingless, perfectly cubic FlightGear aircraft.
 
 ## Project contents
 - 4 m × 4 m × 4 m matte-grey cube fuselage and square front window
-- Three square wheels, rear nozzle, visual afterburner, landing cushion and parachute
+- Three square wheels, rear nozzle with silent visual afterburner, landing cushion and parachute
 - Nasal keyboard control logic and animated disco lighting
 - Initial JSBSim flight-dynamics configuration and custom engine
 - Responsive project website in index.html
