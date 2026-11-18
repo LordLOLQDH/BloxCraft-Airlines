@@ -245,7 +245,15 @@ async function loadOriginalModel(){
   const response=await fetch('./Models/bloxcraft.ac',{cache:'no-cache'});if(!response.ok)throw new Error('HTTP '+response.status+' beim Laden von Models/bloxcraft.ac');
   const source=await response.text();const count=parseAC3D(source);
   for(const name of ['afterburner-flame','landing-cushion','parachute','disco-lamp-blue','disco-lamp-green','disco-lamp-red','disco-lamp-white','disco-beam-blue','disco-beam-green','disco-beam-red','disco-beam-white'])setVisible(name,false);
-  for(const name of ['wheel-nose','wheel-left','wheel-right']){const obj=objects.get(name);if(obj)wheelStart.push({obj,z:obj.position.z});}
+  for(const name of ['wheel-nose','wheel-left','wheel-right']){
+   const obj=objects.get(name);
+   if(obj){
+    const centers={'wheel-nose':[-.985,0,-2.34],'wheel-left':[1.315,-1.23,-2.34],'wheel-right':[1.315,1.23,-2.34]};
+    const c=new THREE.Vector3(...centers[name]);const pivot=new THREE.Group();pivot.name=name+'-pivot';pivot.position.copy(c);
+    aircraftRoot.remove(obj);obj.position.copy(c).multiplyScalar(-1);pivot.add(obj);aircraftRoot.add(pivot);objects.set(name,pivot);
+    wheelStart.push({obj:pivot,z:pivot.position.z});
+   }
+  }
   fuselageMesh=objects.get('fuselage');
   makeCockpit();
   flame=objects.get('afterburner-flame');
