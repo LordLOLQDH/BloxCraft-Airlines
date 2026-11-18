@@ -3,6 +3,7 @@
   <path>Aircraft/BloxCraft-Airlines/Models/bloxcraft.ac</path>
   <animation><type>visibility</type><object-name>afterburner-flame</object-name><condition><greater-than><property>/bloxcraft/afterburner</property><value>0.5</value></greater-than></condition></animation>
   <animation><type>spin</type><object-name>afterburner-flame</object-name><property>/bloxcraft/afterburner</property><factor>900</factor><axis><x>1</x><y>0</y><z>0</z></axis></animation>
+  <animation><type>visibility</type><object-name>gear-struts</object-name><condition><less-than><property>/bloxcraft/wheels-dropped</property><value>0.5</value></less-than></condition></animation>
   <animation><type>translate</type><object-name>wheel-left</object-name><property>/bloxcraft/wheels-dropped</property><factor>-5</factor><axis><x>0</x><y>0</y><z>1</z></axis></animation>
   <animation><type>translate</type><object-name>wheel-right</object-name><property>/bloxcraft/wheels-dropped</property><factor>-5</factor><axis><x>0</x><y>0</y><z>1</z></axis></animation>
   <animation><type>translate</type><object-name>wheel-nose</object-name><property>/bloxcraft/wheels-dropped</property><factor>-5</factor><axis><x>0</x><y>0</y><z>1</z></axis></animation>
