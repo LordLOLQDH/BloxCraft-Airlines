@@ -63,7 +63,6 @@ var toggleAfterburner = func {
     if (afterburner) {
         setprop("/controls/engines/engine[0]/throttle", 1.0);
         setprop("/controls/engines/engine[0]/augmentation", 1);
-        playOneShot("afterburner-on");
     } else {
         setprop("/controls/engines/engine[0]/throttle", 0.65);
         setprop("/controls/engines/engine[0]/augmentation", 0);
