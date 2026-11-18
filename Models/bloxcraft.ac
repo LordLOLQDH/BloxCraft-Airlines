@@ -9,8 +9,12 @@ MATERIAL "disco-green" rgb 0.05 1.0 0.25 amb 0.02 0.2 0.05 emis 0.05 1.0 0.15 sp
 MATERIAL "disco-red" rgb 1.0 0.04 0.04 amb 0.2 0.01 0.01 emis 1.0 0.02 0.02 spec 0 0 0 shi 0
 MATERIAL "disco-white" rgb 1.0 1.0 1.0 amb 0.2 0.2 0.2 emis 0.8 0.8 0.8 spec 0 0 0 shi 0
 MATERIAL "placard-white" rgb 0.95 0.96 0.98 amb 0.75 0.75 0.75 emis 0.25 0.25 0.25 spec 0.05 0.05 0.05 shi 4
+MATERIAL "disco-beam-blue" rgb 0.08 0.32 1.0 amb 0.03 0.08 0.3 emis 0.12 0.25 1.0 spec 0 0 0 shi 0 trans 0.72
+MATERIAL "disco-beam-green" rgb 0.08 1.0 0.3 amb 0.02 0.2 0.05 emis 0.08 0.8 0.18 spec 0 0 0 shi 0 trans 0.72
+MATERIAL "disco-beam-red" rgb 1.0 0.05 0.05 amb 0.2 0.01 0.01 emis 0.9 0.03 0.03 spec 0 0 0 shi 0 trans 0.72
+MATERIAL "disco-beam-white" rgb 1.0 1.0 1.0 amb 0.2 0.2 0.2 emis 0.8 0.8 0.8 spec 0 0 0 shi 0 trans 0.78
 OBJECT world
-kids 15
+kids 19
 OBJECT poly
 name "fuselage"
 crease 45.000
@@ -12021,4 +12025,72 @@ refs 4
 4077 0 0
 4078 0 0
 4079 0 0
+kids 0
+OBJECT poly
+name "disco-beam-blue"
+crease 45.000
+numvert 4
+-0.12 -0.73 2.12
+0.12 -0.73 2.12
+0.75 -3.6 -0.35
+-0.75 -3.6 -0.35
+numsurf 1
+SURF 0x30
+mat 10
+refs 4
+0 0 0
+1 0 0
+2 0 0
+3 0 0
+kids 0
+OBJECT poly
+name "disco-beam-green"
+crease 45.000
+numvert 4
+-0.12 0.73 2.12
+0.12 0.73 2.12
+0.75 3.6 -0.35
+-0.75 3.6 -0.35
+numsurf 1
+SURF 0x30
+mat 11
+refs 4
+0 0 0
+1 0 0
+2 0 0
+3 0 0
+kids 0
+OBJECT poly
+name "disco-beam-red"
+crease 45.000
+numvert 4
+0.73 -0.12 2.12
+0.73 0.12 2.12
+3.6 0.75 -0.35
+3.6 -0.75 -0.35
+numsurf 1
+SURF 0x30
+mat 12
+refs 4
+0 0 0
+1 0 0
+2 0 0
+3 0 0
+kids 0
+OBJECT poly
+name "disco-beam-white"
+crease 45.000
+numvert 4
+-0.73 -0.12 2.12
+-0.73 0.12 2.12
+-3.6 0.75 -0.35
+-3.6 -0.75 -0.35
+numsurf 1
+SURF 0x30
+mat 13
+refs 4
+0 0 0
+1 0 0
+2 0 0
+3 0 0
 kids 0
