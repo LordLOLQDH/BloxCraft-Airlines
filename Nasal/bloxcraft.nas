@@ -1,5 +1,6 @@
 # BloxCraft Airlines BC-001 control module.
 var engineOn = 0;
+var engineReady = 0;
 var afterburner = 0;
 var wheelsDropped = 0;
 var cushionOut = 0;
@@ -23,6 +24,7 @@ var playOneShot = func(name) {
 var toggleEngine = func {
     if (engineOn) {
         engineOn = 0;
+        engineReady = 0;
         afterburner = 0;
         setState("afterburner", 0);
         setprop("/controls/engines/engine[0]/throttle", 0);
@@ -33,6 +35,7 @@ var toggleEngine = func {
         playOneShot("engine-stop");
     } else {
         engineOn = 1;
+        engineReady = 0;
         setprop("/controls/engines/engine[0]/cutoff", 0);
         setprop("/controls/engines/engine[0]/starter", 1);
         setprop("/controls/engines/engine[0]/throttle", 0.20);
@@ -45,13 +48,14 @@ var toggleEngine = func {
                 setprop("/controls/engines/engine[0]/cutoff", 1);
                 setprop("/controls/engines/engine[0]/starter", 0);
                 setprop("/controls/engines/engine[0]/throttle", 0.65);
+                engineReady = 1;
                 setState("engine-state", "RUNNING");
             }
         }, 3.0);
     }
 };
 var toggleAfterburner = func {
-    if (!engineOn) { print("BC-001: Start the engines first."); return; }
+    if (!engineReady) { print("BC-001: Wait for the engine start sequence to finish."); return; }
     afterburner = !afterburner;
     setState("afterburner", afterburner);
     if (afterburner) {
@@ -83,6 +87,7 @@ var deployParachute = func {
 };
 var engineFailure = func {
     engineOn = 0;
+    engineReady = 0;
     afterburner = 0;
     setState("engine-running", 0);
     setState("engine-failure", 1);
