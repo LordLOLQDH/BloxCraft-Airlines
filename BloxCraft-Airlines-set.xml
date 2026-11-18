@@ -2,7 +2,7 @@
 <PropertyList>
   <sim>
     <description>BloxCraft Airlines BC-001</description><author>BloxCraft Airlines</author><status>Development</status><aircraft-version>0.2</aircraft-version>
-    <flight-model>jsb</flight-model><flight-model-file>Aircraft/BloxCraft-Airlines/BC-001.xml</flight-model-file>
+    <flight-model>jsb</flight-model><aero>BC-001</aero>
     <model><path>Aircraft/BloxCraft-Airlines/Models/bloxcraft.xml</path></model>
     <sound><path>Aircraft/BloxCraft-Airlines/Sounds/bloxcraft-sound.xml</path></sound>
     <chase-distance-m>-18</chase-distance-m>
