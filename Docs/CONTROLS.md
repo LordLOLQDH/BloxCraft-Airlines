@@ -3,13 +3,13 @@
 | Key | Function |
 |---|---|
 | I | Engine start / stop |
-| A | Afterburner toggle |
-| H | Drop the three wheels |
-| G | Deploy landing cushion |
-| P | Emergency parachute |
+| A | Toggle afterburner |
+| H | Release the three wheel assemblies (visual animation) |
+| G | Deploy landing cushion (visual deployment; pops on detected touchdown) |
+| P | Deploy parachute and command speedbrake |
 | E | Simulate engine failure and deploy parachute |
-| R | Radio / disco toggle |
+| R | Toggle radio / disco mode |
 
-The radio/disco state is independent of the engine state. Landing-cushion visual state is monitored for touchdown and hidden after contact. Sound filenames and requirements are documented in `Sounds/README.txt`.
+Radio/disco is independent of engine state. The sound configuration reads the matching /bloxcraft properties. Add the required audio files listed in Sounds/README.txt.
 
-These controls are a development implementation and must be tested in FlightGear. The current flight-model entry is still a placeholder.
+These are development controls. The wheel release and cushion are not yet independent physical bodies/forces, and all controls must be verified in FlightGear.
