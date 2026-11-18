@@ -27,17 +27,27 @@ var toggleEngine = func {
         setState("afterburner", 0);
         setprop("/controls/engines/engine[0]/throttle", 0);
         setprop("/controls/engines/engine[0]/starter", 0);
+        setprop("/controls/engines/engine[0]/cutoff", 0);
         setState("engine-running", 0);
         setState("engine-state", "OFF");
         playOneShot("engine-stop");
     } else {
         engineOn = 1;
+        setprop("/controls/engines/engine[0]/cutoff", 0);
         setprop("/controls/engines/engine[0]/starter", 1);
-        setprop("/controls/engines/engine[0]/throttle", 0.65);
+        setprop("/controls/engines/engine[0]/throttle", 0.20);
         setState("engine-running", 1);
-        setState("engine-state", "RUNNING");
+        setState("engine-state", "STARTING");
         setState("engine-failure", 0);
         playOneShot("engine-start");
+        settimer(func {
+            if (engineOn) {
+                setprop("/controls/engines/engine[0]/cutoff", 1);
+                setprop("/controls/engines/engine[0]/starter", 0);
+                setprop("/controls/engines/engine[0]/throttle", 0.65);
+                setState("engine-state", "RUNNING");
+            }
+        }, 3.0);
     }
 };
 var toggleAfterburner = func {
@@ -80,6 +90,7 @@ var engineFailure = func {
     setState("afterburner", 0);
     setprop("/controls/engines/engine[0]/throttle", 0);
     setprop("/controls/engines/engine[0]/starter", 0);
+    setprop("/controls/engines/engine[0]/cutoff", 0);
     setprop("/controls/engines/engine[0]/augmentation", 0);
     playOneShot("engine-stop");
     deployParachute();
